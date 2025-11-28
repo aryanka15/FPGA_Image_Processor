@@ -1,8 +1,8 @@
 -------------------------------------
 | Tool Version : Vivado v.2025.1
-| Date         : Thu Nov 27 18:48:10 2025
+| Date         : Fri Nov 28 01:53:49 2025
 | Host         : AryanHPLaptop
-| Design       : design_1
+| Design       : checkpoint_top
 | Device       : xc7s50-ftgb196-1--
 -------------------------------------
 

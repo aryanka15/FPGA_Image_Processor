@@ -23,14 +23,14 @@
 module mac(
     input logic clk, n_rst,
     input logic [71:0] conv_data,
-    input logic [71:0] kernel, 
+    input logic signed [71:0] kernel, 
     input logic start_conv, 
     output logic [7:0] output_pixel,
     output logic data_ready
     );
         
-    logic [11:0] mul_data [2:0][2:0]; 
-    logic [14:0] sum, sum_reg;
+    logic signed [12:0] mul_data [2:0][2:0]; 
+    logic signed [15:0] sum, sum_reg;
     logic [7:0] sum_output;  
     
     logic mul_valid, sum_valid; 
@@ -54,22 +54,26 @@ module mac(
             output_pixel <= '0; 
         end
         else begin
-            sum_reg <= sum; 
-            output_pixel <= sum_output; 
+            if (mul_valid) begin
+                sum_reg <= sum;     
+            end
+            if (sum_valid) begin
+                output_pixel <= sum_output; 
+            end
         end
     end
     
     genvar i, j; 
     generate
-        for (i = 0; i < 3; i++) begin
-            for (j = 0; j < 3; j++) begin
-                localparam index = 8*(3*i + j); 
-                always_ff @(posedge clk, negedge n_rst) begin
+        for (i = 0; i < 3; i++) begin: gen_row
+            for (j = 0; j < 3; j++) begin: gen_col
+                localparam index = 72 - 8*(3*i + j + 1); 
+                always_ff @(posedge clk, negedge n_rst) begin: ff_mul
                     if (~n_rst) begin
-                        mul_data[i][j] = '0; 
+                        mul_data[i][j] <= '0; 
                     end
-                    else begin
-                        mul_data[i][j] <= conv_data[(index + 7):index] * kernel[(index + 7):index]; 
+                    else if (start_conv) begin
+                        mul_data[i][j] <= $signed(conv_data[(index + 7):index]) * $signed(kernel[(index + 7):index]); 
                     end
                 end
             end
@@ -77,7 +81,7 @@ module mac(
     endgenerate
     
     always_comb begin: sum_logic
-        sum = 15'd0; 
+        sum = 16'd0; 
         for (int k = 0; k < 3; k++) begin
             for (int z = 0; z < 3; z++) begin
                 sum = sum + mul_data[k][z]; 
@@ -86,7 +90,15 @@ module mac(
     end  
     
     always_comb begin: output_pixel_logic
-        sum_output = sum_reg > 15'd255 ? 8'd255 : sum_reg[7:0]; 
+        if (sum_reg < 16'd0) begin
+            sum_output = 8'd0; 
+        end
+        else if (sum_reg > 16'd255) begin
+            sum_output = 8'd255; 
+        end
+        else begin
+            sum_output = sum_reg[7:0]; 
+        end
     end
         
     

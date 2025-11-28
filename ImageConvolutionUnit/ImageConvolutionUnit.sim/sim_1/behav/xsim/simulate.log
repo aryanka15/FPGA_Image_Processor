@@ -1,0 +1,4 @@
+Time resolution is 1 ps
+Test Case 1 started (Expected Output: 225)
+Test Case 2 started (Expected Output: 255)
+$finish called at time : 85 ns : File "C:/Users/karan/Documents/GitHub/ImageProcessor/ImageConvolutionUnit/ImageConvolutionUnit.srcs/sim_1/new/tb_mac.sv" Line 83

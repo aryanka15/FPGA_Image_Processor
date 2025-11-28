@@ -29,7 +29,6 @@ module tb_line_buffer();
     // Instantiate clock
     logic clk, n_rst, ren, wen; 
     logic [7:0] wdata, rdata;
-    logic [9:0] wptr;  
     logic empty, full; 
     
     line_buffer #() buffer (.*); 

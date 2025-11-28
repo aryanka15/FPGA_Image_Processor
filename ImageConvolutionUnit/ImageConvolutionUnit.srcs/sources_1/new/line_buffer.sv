@@ -6,7 +6,6 @@ module line_buffer #(parameter SIZE=512) (
     input  logic        ren,
     input  logic        wen,
     input  logic [7:0]  wdata,
-    output logic [$clog2(SIZE):0] wptr,
     output logic empty,
     output logic full,
     output logic [7:0] rdata
@@ -17,7 +16,7 @@ module line_buffer #(parameter SIZE=512) (
 
     logic [7:0] mem [SIZE-1:0];
 
-    logic [ADDR_BITS:0] rptr;
+    logic [ADDR_BITS:0] rptr, wptr; 
     logic [ADDR_BITS:0] nxt_wptr, nxt_rptr;
 
     logic [ADDR_BITS-1:0] waddr, raddr;
@@ -30,11 +29,6 @@ module line_buffer #(parameter SIZE=512) (
     assign nxt_wptr = wptr + (wen & ~full); 
     assign nxt_rptr = rptr + (ren & ~empty); 
     
-//    initial begin
-//        for (int i = 0; i < SIZE; i++) begin
-//            mem[i] = 8'h00; // Initialize all memory locations to 0
-//        end
-//    end
 
     always_ff @(posedge clk) begin
         if (wen)

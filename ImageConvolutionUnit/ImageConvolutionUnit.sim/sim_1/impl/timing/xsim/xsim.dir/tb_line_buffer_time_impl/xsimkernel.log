@@ -2,3 +2,6 @@ Running: xsim.dir/tb_line_buffer_time_impl/xsimk.exe -simmode gui -wdb tb_line_b
 Design successfully loaded
 Design Loading Memory Usage: 12044 KB (Peak: 12044 KB)
 Design Loading CPU Usage: 31 ms
+Simulation completed
+Simulation Memory Usage: 13792 KB (Peak: 13792 KB)
+Simulation CPU Usage: 140 ms
