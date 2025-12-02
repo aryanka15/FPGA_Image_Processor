@@ -33,6 +33,30 @@ module mac(
     logic signed [15:0] sum, sum_reg;
     logic [7:0] sum_output;  
     
+    
+    logic signed [7:0] kernel_array [0:2][0:2];
+    assign kernel_array[0][0] = kernel[71:64];
+    assign kernel_array[0][1] = kernel[63:56];
+    assign kernel_array[0][2] = kernel[55:48];
+    assign kernel_array[1][0] = kernel[47:40];
+    assign kernel_array[1][1] = kernel[39:32];
+    assign kernel_array[1][2] = kernel[31:24];
+    assign kernel_array[2][0] = kernel[23:16];
+    assign kernel_array[2][1] = kernel[15:8];
+    assign kernel_array[2][2] = kernel[7:0];
+
+    // --- Unpack conv_data into 2D array of pixels ---
+    logic [7:0] pixel_array [0:2][0:2];
+    assign pixel_array[0][0] = conv_data[71:64];
+    assign pixel_array[0][1] = conv_data[63:56];
+    assign pixel_array[0][2] = conv_data[55:48];
+    assign pixel_array[1][0] = conv_data[47:40];
+    assign pixel_array[1][1] = conv_data[39:32];
+    assign pixel_array[1][2] = conv_data[31:24];
+    assign pixel_array[2][0] = conv_data[23:16];
+    assign pixel_array[2][1] = conv_data[15:8];
+    assign pixel_array[2][2] = conv_data[7:0];
+    
     logic mul_valid, sum_valid; 
         
     always_ff @(posedge clk, negedge n_rst) begin
@@ -73,7 +97,7 @@ module mac(
                         mul_data[i][j] <= '0; 
                     end
                     else if (start_conv) begin
-                        mul_data[i][j] <= $unsigned(conv_data[(index + 7):index]) * $signed(kernel[(index + 7):index]); 
+                        mul_data[i][j] <= $signed({1'b0,pixel_array[i][j]}) * kernel_array[i][j];
                     end
                 end
             end
@@ -90,10 +114,10 @@ module mac(
     end  
     
     always_comb begin: output_pixel_logic
-        if (sum_reg < 16'd0) begin
+        if (sum_reg < 0) begin
             sum_output = 8'd0; 
         end
-        else if (sum_reg > 16'd255) begin
+        else if (sum_reg > 255) begin
             sum_output = 8'd255; 
         end
         else begin

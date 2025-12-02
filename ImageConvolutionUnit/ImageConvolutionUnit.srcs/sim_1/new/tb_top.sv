@@ -1,121 +1,104 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 11/28/2025 12:40:30 PM
-// Design Name: 
-// Module Name: tb_top
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
+module tb_top;
 
-module tb_top();
-    
-    logic clk, n_rst; 
-    logic i_wen, i_start, output_valid; 
-    logic [7:0] i_wdata_1, i_wdata_2, i_wdata_3, output_pixel; 
+    logic clk, n_rst;
+    logic i_wen, i_start, output_valid;
+    logic [7:0] i_wdata_1, i_wdata_2, i_wdata_3;
+    logic [7:0] output_pixel;
 
-    top #() DUT (
-        .clk(clk), 
+    // DUT
+    top DUT (
+        .clk(clk),
         .n_rst(n_rst),
-        .i_wen(i_wen), 
-        .i_start(i_start), 
-        .output_valid(output_valid),
+        .i_wen(i_wen),
+        .i_start(i_start),
         .i_wdata_1(i_wdata_1),
         .i_wdata_2(i_wdata_2),
         .i_wdata_3(i_wdata_3),
-        .output_pixel(output_pixel)
+        .output_pixel(output_pixel),
+        .output_valid(output_valid)
     );
 
-    initial begin
-        clk = 1'b0;
-        forever begin
-            #(5);
-            clk = ~clk; 
-        end
-    end
-    
-    integer i, expected; 
-    integer passed_tests;
-    integer total_tests; 
-    int a,b,c; 
+    // Clock
+    initial clk = 0;
+    always #5 clk = ~clk;
 
-    function int pix;
-        input int pos;
-        begin
-            pix = (pos > 255) ? (511 - pos) : pos;
-        end
-    endfunction
-    
-    initial begin
-//        fin = $fopen("C:\\Users\\karan\\Downloads\\lena.bmp", "rb");
-//        fout = $fopen("C:\\Users\\karan\\Downloads\\lena_processed.bmp", "wb");
+    // Parameters
+    localparam int LINE_LENGTH = 512;
 
-        n_rst = 0; 
+    // Input image and kernel
+    logic [7:0] line0[0:LINE_LENGTH-1];
+    logic [7:0] line1[0:LINE_LENGTH-1];
+    logic [7:0] line2[0:LINE_LENGTH-1];
+    int kernel[0:2][0:2];
+
+    initial begin
+        int i;
+        int expected, a,b,c,d,e,f,g,h,j;
+        int passed = 0, total = 0;
+
+        // Reset
+        n_rst = 0;
         i_wen = 0;
-        i_wdata_1 = 0;
-        i_wdata_2 = 0;
-        i_wdata_3 = 0;
         i_start = 0;
-        passed_tests = 0;
-        total_tests = 0; 
-        
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk); 
-        
+        repeat(5) @(posedge clk);
         n_rst = 1;
         @(posedge clk);
-        @(posedge clk); 
 
-        for (i = 0; i < 512; i++) begin
-            i_wdata_1 = i > 255 ? 511 - i : i;
-            i_wdata_2 = i > 255 ? 511 - i : i;
-            i_wdata_3 = i > 255 ? 511 - i : i;
-            i_wen = 1; 
-            @(posedge clk); 
+        kernel = '{
+            '{-1, 0,  1},
+            '{-2, 0,  2},
+            '{-1, 0,  1}
+        };
+
+        for (i=0; i<LINE_LENGTH; i++) begin
+            line0[i] = $urandom_range(0,255);
+            line1[i] = $urandom_range(0,255);
+            line2[i] = $urandom_range(0,255);
         end
-        i_wen = 0; 
+
+        // Stream 3 lines into line buffers in parallel
+        for (i=0; i<LINE_LENGTH; i++) begin
+            i_wdata_1 = line0[i];
+            i_wdata_2 = line1[i];
+            i_wdata_3 = line2[i];
+            i_wen = 1;
+            @(posedge clk);
+        end
+        i_wen = 0;
+        @(posedge clk);
+        @(posedge clk);
         @(posedge clk); 
+        // Start convolution
+        i_start = 1;
         @(posedge clk);
-        i_start = 1; 
-        @(posedge clk);
-        i_start = 0; 
-        
-        for (i = 0; i < 510; i++) begin
-            @(posedge output_valid); 
-            total_tests++; 
-            a = pix(i);
-            b = pix(i+1);
-            c = pix(i+2);
-            expected = (a + b + c) * 3;
+        i_start = 0;
+
+        // Wait for output and check results
+        for (i=0; i<LINE_LENGTH-2; i++) begin
+            @(posedge output_valid);
+
+            // Compute expected output
+            a = line0[i];   b = line0[i+1];   c = line0[i+2];
+            d = line1[i];   e = line1[i+1];   f = line1[i+2];
+            g = line2[i];   h = line2[i+1];   j = line2[i+2];
+
+            expected = a*kernel[0][0] + b*kernel[0][1] + c*kernel[0][2]
+                     + d*kernel[1][0] + e*kernel[1][1] + f*kernel[1][2]
+                     + g*kernel[2][0] + h*kernel[2][1] + j*kernel[2][2];
             if (expected > 255) expected = 255;
-            
-            if (output_pixel == expected) begin
-                passed_tests++; 
-            end
-            else begin
-                $display("i: %d, expected: %d, actual: %d\n", i, expected, output_pixel); 
-            end
+            if (expected < 0) expected = 0;
+
+            total++;
+            if (output_pixel == expected)
+                passed++;
+            else
+                $display("Mismatch at pixel %0d: expected %0d, got %0d", i, expected, output_pixel);
         end
-        
-        $display("%d/%d tests passed\n", passed_tests, total_tests); 
-        
-        $finish;         
+
+        $display("Passed %0d/%0d tests", passed, total);
+        $finish;
     end
 
 endmodule
-

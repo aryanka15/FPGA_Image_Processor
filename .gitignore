@@ -50,3 +50,11 @@ ip_user_files/
 .DS_Store
 Thumbs.db
 
+*.hw/
+*.sim/
+*.cache/
+*.ip_user_files/
+*.jou
+*.log
+*.str
+
