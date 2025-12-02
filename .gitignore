@@ -1,0 +1,52 @@
+# =========================================
+# Vivado Project Gitignore (run directories)
+# =========================================
+
+# ----- Run directories (synthesis, implementation, simulation) -----
+sim_*/        # Simulation run folders
+synth_*/      # Synthesis run folders
+impl_*/       # Implementation run folders
+*.runs/       # Older style run folders
+
+# ----- Vivado project generated files -----
+*.jou         # Journal files
+*.log         # Log files
+*.str         # Strategy files
+*.wcfg        # Workspace config
+*.checkpoint
+*.xpr.lock    # Project lock file
+*.hwdef       # Hardware definition files
+*.xgui/       # GUI files
+
+# ----- Simulation outputs -----
+*.wdb
+*.vcd
+*.key
+*.pb
+*.bin
+*.xsim
+*.str
+
+# ----- Temporary / backup files -----
+*.backup
+*.xml
+*.txt
+*.ltx
+*.html
+*~
+*.bak
+
+# ----- IP generated files -----
+ip_repo/
+ip_user_files/
+*.ngc
+*.dcp
+*.xco
+
+# Track IP configuration files but ignore generated output
+!*.xci
+
+# ----- OS-specific files -----
+.DS_Store
+Thumbs.db
+
