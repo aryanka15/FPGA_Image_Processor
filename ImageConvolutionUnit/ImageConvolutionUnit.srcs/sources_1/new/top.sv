@@ -51,16 +51,28 @@ module top (
     logic [71:0] conv_data;   
     
     // MAC Signals    
-    localparam [71:0] kernel = {
-        8'hFE,  // K[0,0] = -2 (MSB)
-        8'hFF,  // K[0,1] = -1
-        8'h00,  // K[0,2] = 0
-        8'hFF,  // K[1,0] = -1
+//    localparam [71:0] kernel = {
+//        8'hFE,  // K[0,0] = -2 (MSB)
+//        8'hFF,  // K[0,1] = -1
+//        8'h00,  // K[0,2] = 0
+//        8'hFF,  // K[1,0] = -1
+//        8'h01,  // K[1,1] = +1
+//        8'h01,  // K[1,2] = +1
+//        8'h00,  // K[2,0] = 0
+//        8'h01,  // K[2,1] = +1
+//        8'h02   // K[2,2] = +2 (LSB)
+//    };
+
+        localparam [71:0] kernel = {
+        8'h01,  // K[0,0] = -2 (MSB)
+        8'h01,  // K[0,1] = -1
+        8'h01,  // K[0,2] = 0
+        8'h01,  // K[1,0] = -1
         8'h01,  // K[1,1] = +1
         8'h01,  // K[1,2] = +1
-        8'h00,  // K[2,0] = 0
+        8'h01,  // K[2,0] = 0
         8'h01,  // K[2,1] = +1
-        8'h02   // K[2,2] = +2 (LSB)
+        8'h01   // K[2,2] = +2 (LSB)
     };
     
     // Controller Signals
@@ -70,9 +82,14 @@ module top (
         if (~n_rst) begin
             wdata_1 <= '0; 
             wdata_2 <= '0; 
-            wdata_3 <= '0; 
+            wdata_3 <= '0;
+            wdata_1_1 <= '0; 
+            wdata_2_1 <= '0; 
+            wdata_3_1 <= '0; 
             wen <= '0;
             start <= '0;
+            wen_1 <= '0;
+            start_1 <= '0;
         end
         else begin
             wdata_1_1 <= i_wdata_1; 

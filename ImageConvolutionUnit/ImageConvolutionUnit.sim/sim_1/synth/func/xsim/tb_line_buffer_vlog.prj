@@ -1,9 +1,0 @@
-# compile verilog/system verilog design source files
-verilog xil_defaultlib  --include "../../../../../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef" \
-"tb_line_buffer_func_synth.v" \
-
-sv xil_defaultlib  --include "../../../../../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef" \
-"../../../../../ImageConvolutionUnit.srcs/sim_1/new/tb_line_buffer.sv" \
-
-# Do not sort compile order
-nosort

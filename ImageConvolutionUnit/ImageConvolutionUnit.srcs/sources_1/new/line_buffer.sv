@@ -21,7 +21,7 @@ module line_buffer #(parameter SIZE=512) (
 
     logic [ADDR_BITS-1:0] waddr, raddr;
     
-    logic full, empty, full_n, empty_n;  
+    logic full_n, empty_n;  
 
     assign waddr = wptr[ADDR_BITS-1:0];
     assign raddr = rptr[ADDR_BITS-1:0];

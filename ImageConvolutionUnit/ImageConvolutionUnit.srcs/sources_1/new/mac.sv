@@ -29,7 +29,7 @@ module mac(
     output logic data_ready
     );
         
-    logic signed [12:0] mul_data [2:0][2:0]; 
+    logic signed [15:0] mul_data [2:0][2:0]; 
     logic signed [15:0] sum, sum_reg;
     logic [7:0] sum_output;  
     
@@ -73,7 +73,7 @@ module mac(
                         mul_data[i][j] <= '0; 
                     end
                     else if (start_conv) begin
-                        mul_data[i][j] <= $signed(conv_data[(index + 7):index]) * $signed(kernel[(index + 7):index]); 
+                        mul_data[i][j] <= $unsigned(conv_data[(index + 7):index]) * $signed(kernel[(index + 7):index]); 
                     end
                 end
             end
