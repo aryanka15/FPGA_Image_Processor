@@ -31,21 +31,19 @@ module line_buffer #(parameter SIZE=512) (
     
 
     always_ff @(posedge clk) begin
-        if (wen)
+        if (wen & ~full)
             mem[waddr] <= wdata;
     end
 
     always_ff @(posedge clk) begin
-        if (ren)
+        if (ren & ~empty)
             rdata <= mem[raddr];
     end
 
     always_comb begin
         full_n = 1'b0;
-        empty_n = 1'b0; 
-        if (nxt_wptr == nxt_rptr)
-            empty_n = 1;
-        else if ((nxt_wptr[ADDR_BITS-1:0] == nxt_rptr[ADDR_BITS-1:0]) && (nxt_wptr[ADDR_BITS] != nxt_rptr[ADDR_BITS]))
+        empty_n = (nxt_wptr == nxt_rptr); 
+        if ((nxt_wptr[ADDR_BITS-1:0] == rptr[ADDR_BITS-1:0]) && (nxt_wptr[ADDR_BITS] != rptr[ADDR_BITS]))
             full_n = 1;
     end
 

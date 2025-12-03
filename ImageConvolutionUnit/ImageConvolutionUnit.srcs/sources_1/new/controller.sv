@@ -50,7 +50,7 @@ module controller(
     always_comb begin: count_logic 
         nxt_cnt = cnt_3; 
         if (cnt_en) begin
-            nxt_cnt = cnt_3 == 3'd3 ? 3'd0 : cnt_3 + 1; 
+            nxt_cnt = cnt_3 == 3'd3 ? 3'd1 : cnt_3 + 1; 
         end
     end
     

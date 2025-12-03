@@ -24,80 +24,92 @@ module tb_top;
     initial clk = 0;
     always #5 clk = ~clk;
 
-    // Parameters
-    localparam int LINE_LENGTH = 512;
+    localparam int IMAGE_WIDTH  = 512;
+    localparam int IMAGE_HEIGHT = 512;
 
-    // Input image and kernel
-    logic [7:0] line0[0:LINE_LENGTH-1];
-    logic [7:0] line1[0:LINE_LENGTH-1];
-    logic [7:0] line2[0:LINE_LENGTH-1];
+    logic [7:0] image[0:IMAGE_HEIGHT-1][0:IMAGE_WIDTH-1];
     int kernel[0:2][0:2];
 
+    // Output file handle
+    integer outfile;
+
+    // Read image from text file
+    task automatic read_image_file(input string filename);
+        int i, j, c;
+        int file;
+        file = $fopen(filename, "r");
+        if (file == 0) begin
+            $display("ERROR: Cannot open file %s", filename);
+            $finish;
+        end
+        for (i = 0; i < IMAGE_HEIGHT; i++) begin
+            for (j = 0; j < IMAGE_WIDTH; j++) begin
+                if ($fscanf(file, "%d", c) != 1) begin
+                    $display("ERROR: Not enough pixels in %s. i: %d, j: %d\n", filename, i, j);
+                    $finish;
+                end
+                image[i][j] = c;
+            end
+        end
+        $fclose(file);
+    endtask
+
     initial begin
-        int i;
-        int expected, a,b,c,d,e,f,g,h,j;
-        int passed = 0, total = 0;
+        int i, j;
+        int a,b,c,d,e,f,g,h,jk;
+        int expected;
+
+        // Open output file
+        outfile = $fopen("C:\\Users\\karan\\Documents\\GitHub\\ImageProcessor\\lena_new.txt","w");
+        if (outfile == 0) begin
+            $display("ERROR: Cannot open output file");
+            $finish;
+        end
 
         // Reset
-        n_rst = 0;
-        i_wen = 0;
-        i_start = 0;
+        n_rst = 0; i_wen = 0; i_start = 0;
         repeat(5) @(posedge clk);
         n_rst = 1;
         @(posedge clk);
 
+        // Sobel kernel
         kernel = '{
-            '{-1, 0,  1},
-            '{-2, 0,  2},
-            '{-1, 0,  1}
+            '{-1,0,1},
+            '{-2,0,2},
+            '{-1,0,1}
         };
 
-        for (i=0; i<LINE_LENGTH; i++) begin
-            line0[i] = $urandom_range(0,255);
-            line1[i] = $urandom_range(0,255);
-            line2[i] = $urandom_range(0,255);
-        end
+        // Load image
+        read_image_file("C:\\Users\\karan\\Documents\\GitHub\\ImageProcessor\\image.txt "); // replace with your path
 
-        // Stream 3 lines into line buffers in parallel
-        for (i=0; i<LINE_LENGTH; i++) begin
-            i_wdata_1 = line0[i];
-            i_wdata_2 = line1[i];
-            i_wdata_3 = line2[i];
-            i_wen = 1;
+        // Stream image pixels
+        for (i = 0; i < IMAGE_HEIGHT-2; i++) begin
+            for (j = 0; j < IMAGE_WIDTH; j++) begin
+                i_wdata_1 = image[i  ][j];
+                i_wdata_2 = image[i+1][j];
+                i_wdata_3 = image[i+2][j];
+                i_wen = 1;
+                @(posedge clk);
+            end
+            i_wen = 0;
+            @(posedge clk);
+            @(posedge clk);
+
+            // Start convolution
+            i_start = 1;
+            @(posedge clk);
+            i_start = 0;
+
+            // Capture output pixels
+            for (j = 0; j < IMAGE_WIDTH-2; j++) begin
+                @(posedge output_valid);
+                $fwrite(outfile,"%0d\n",output_pixel);
+            end
             @(posedge clk);
         end
-        i_wen = 0;
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk); 
-        // Start convolution
-        i_start = 1;
-        @(posedge clk);
-        i_start = 0;
 
-        // Wait for output and check results
-        for (i=0; i<LINE_LENGTH-2; i++) begin
-            @(posedge output_valid);
-
-            // Compute expected output
-            a = line0[i];   b = line0[i+1];   c = line0[i+2];
-            d = line1[i];   e = line1[i+1];   f = line1[i+2];
-            g = line2[i];   h = line2[i+1];   j = line2[i+2];
-
-            expected = a*kernel[0][0] + b*kernel[0][1] + c*kernel[0][2]
-                     + d*kernel[1][0] + e*kernel[1][1] + f*kernel[1][2]
-                     + g*kernel[2][0] + h*kernel[2][1] + j*kernel[2][2];
-            if (expected > 255) expected = 255;
-            if (expected < 0) expected = 0;
-
-            total++;
-            if (output_pixel == expected)
-                passed++;
-            else
-                $display("Mismatch at pixel %0d: expected %0d, got %0d", i, expected, output_pixel);
-        end
-
-        $display("Passed %0d/%0d tests", passed, total);
+        $fclose(outfile);
+        $display("Finished writing output pixels to conv_output.txt");
         $finish;
     end
 
