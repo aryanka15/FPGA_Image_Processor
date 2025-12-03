@@ -30,7 +30,7 @@ impl_*/       # Implementation run folders
 # ----- Temporary / backup files -----
 *.backup
 *.xml
-*.txt
+# *.txt
 *.ltx
 *.html
 *~
