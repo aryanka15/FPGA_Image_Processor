@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_top_func_impl.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_top" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.019300000 ms"></ZoomStartTime>
+      <ZoomEndTime time="32.519300001 ms"></ZoomEndTime>
+      <Cursor1Time time="14.269300000 ms"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="261"></NameColumnWidth>
+      <ValueColumnWidth column_width="120"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="12" />
+   <wvobject fp_name="/tb_top/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/n_rst" type="logic">
+      <obj_property name="ElementShortName">n_rst</obj_property>
+      <obj_property name="ObjectShortName">n_rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/i_wen" type="logic">
+      <obj_property name="ElementShortName">i_wen</obj_property>
+      <obj_property name="ObjectShortName">i_wen</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/i_start" type="logic">
+      <obj_property name="ElementShortName">i_start</obj_property>
+      <obj_property name="ObjectShortName">i_start</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/output_valid" type="logic">
+      <obj_property name="ElementShortName">output_valid</obj_property>
+      <obj_property name="ObjectShortName">output_valid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/i_wdata_1" type="array">
+      <obj_property name="ElementShortName">i_wdata_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">i_wdata_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/i_wdata_2" type="array">
+      <obj_property name="ElementShortName">i_wdata_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">i_wdata_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/output_pixel" type="array">
+      <obj_property name="ElementShortName">output_pixel[7:0]</obj_property>
+      <obj_property name="ObjectShortName">output_pixel[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/kernel" type="array">
+      <obj_property name="ElementShortName">kernel[0:2][0:2][31:0]</obj_property>
+      <obj_property name="ObjectShortName">kernel[0:2][0:2][31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/outfile" type="array">
+      <obj_property name="ElementShortName">outfile[31:0]</obj_property>
+      <obj_property name="ObjectShortName">outfile[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/IMAGE_WIDTH" type="array">
+      <obj_property name="ElementShortName">IMAGE_WIDTH[31:0]</obj_property>
+      <obj_property name="ObjectShortName">IMAGE_WIDTH[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/IMAGE_HEIGHT" type="array">
+      <obj_property name="ElementShortName">IMAGE_HEIGHT[31:0]</obj_property>
+      <obj_property name="ObjectShortName">IMAGE_HEIGHT[31:0]</obj_property>
+   </wvobject>
+</wave_config>

@@ -60,7 +60,7 @@ module tb_top;
         int expected;
 
         // Open output file
-        outfile = $fopen("C:\\Users\\karan\\Documents\\GitHub\\ImageProcessor\\lena_new.txt","w");
+        outfile = $fopen("C:\\Users\\karan\\Documents\\GitHub\\ImageProcessor\\output\\lena_new.txt","w");
         if (outfile == 0) begin
             $display("ERROR: Cannot open output file");
             $finish;
@@ -69,9 +69,15 @@ module tb_top;
         // Reset
         n_rst = 0; i_wen = 0; i_start = 0;
         repeat(5) @(posedge clk);
+        @(negedge clk); 
         n_rst = 1;
         @(posedge clk);
-
+        @(posedge clk);
+        @(posedge clk);
+        @(posedge clk);  
+        @(posedge clk); 
+        @(negedge clk);
+        
         // Sobel kernel
         kernel = '{
             '{-1,0,1},
@@ -80,32 +86,38 @@ module tb_top;
         };
 
         // Load image
-        read_image_file("C:\\Users\\karan\\Documents\\GitHub\\ImageProcessor\\image.txt "); // replace with your path
+        read_image_file("C:\\Users\\karan\\Documents\\GitHub\\ImageProcessor\\test_scripts\\image.txt "); // replace with your path
 
         // Stream image pixels
         for (i = 0; i < IMAGE_HEIGHT-2; i++) begin
+            if (i%10) begin
+                $display("i: %d", i); 
+            end
             for (j = 0; j < IMAGE_WIDTH; j++) begin
                 i_wdata_1 = image[i  ][j];
                 i_wdata_2 = image[i+1][j];
                 i_wdata_3 = image[i+2][j];
                 i_wen = 1;
-                @(posedge clk);
+                @(negedge clk);
             end
             i_wen = 0;
             @(posedge clk);
             @(posedge clk);
-
+            @(posedge clk);
+            @(posedge clk);
             // Start convolution
+            @(negedge clk); 
             i_start = 1;
             @(posedge clk);
+            @(negedge clk); 
             i_start = 0;
 
             // Capture output pixels
             for (j = 0; j < IMAGE_WIDTH-2; j++) begin
                 @(posedge output_valid);
+                @(negedge clk); 
                 $fwrite(outfile,"%0d\n",output_pixel);
             end
-            @(posedge clk);
         end
 
         $fclose(outfile);

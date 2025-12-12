@@ -30,7 +30,9 @@ module mac(
     );
         
     logic signed [15:0] mul_data [2:0][2:0]; 
-    logic signed [15:0] sum, sum_reg;
+    logic signed [15:0] sum_rows [2:0];
+    logic signed [15:0] sum_rows_reg [2:0];
+    logic signed [15:0] sum_reg; 
     logic [7:0] sum_output;  
     
     
@@ -57,36 +59,24 @@ module mac(
     assign pixel_array[2][1] = conv_data[15:8];
     assign pixel_array[2][2] = conv_data[7:0];
     
-    logic mul_valid, sum_valid; 
+    logic mul_valid, sum_valid, sum_valid1; 
         
     always_ff @(posedge clk, negedge n_rst) begin
         if (~n_rst) begin
             mul_valid <= '0;
             sum_valid <= '0;
+            sum_valid1 <= '0; 
             data_ready <= '0;
         end
         else begin
             mul_valid <= start_conv; 
-            sum_valid <= mul_valid; 
+            sum_valid1 <= mul_valid; 
+            sum_valid <= sum_valid1; 
             data_ready <= sum_valid; 
         end
     end
     
-    always_ff @(posedge clk, negedge n_rst) begin
-        if (~n_rst) begin
-            sum_reg <= '0; 
-            output_pixel <= '0; 
-        end
-        else begin
-            if (mul_valid) begin
-                sum_reg <= sum;     
-            end
-            if (sum_valid) begin
-                output_pixel <= sum_output; 
-            end
-        end
-    end
-    
+     
     genvar i, j; 
     generate
         for (i = 0; i < 3; i++) begin: gen_row
@@ -104,14 +94,42 @@ module mac(
         end
     endgenerate
     
-    always_comb begin: sum_logic
-        sum = 16'd0; 
-        for (int k = 0; k < 3; k++) begin
-            for (int z = 0; z < 3; z++) begin
-                sum = sum + mul_data[k][z]; 
+    genvar k;
+    generate
+        for (k = 0; k < 3; k++) begin
+            always_comb begin: sum_logic
+                sum_rows[k] = 16'd0;
+                if (mul_valid) begin
+                    for (int z = 0; z < 3; z++) begin
+                        sum_rows[k] = sum_rows[k] + mul_data[k][z];
+                    end
+                end
+            end
+            
+            always_ff @(posedge clk, negedge n_rst) begin: sum_rows_reg_logic 
+                if (~n_rst) begin
+                    sum_rows_reg[k] <= 16'd0; 
+                end
+                else begin
+                    if (mul_valid) begin
+                        sum_rows_reg[k] <= sum_rows[k];
+                    end
+                end
             end
         end
-    end  
+    endgenerate
+    
+    always_ff @(posedge clk, negedge n_rst) begin
+        if (~n_rst) begin
+            sum_reg <= 16'd0; 
+            output_pixel <= 8'd0; 
+        end
+        else begin
+            sum_reg <= sum_rows_reg[0] + sum_rows_reg[1] + sum_rows_reg[2];
+            if (sum_valid) 
+                output_pixel <= sum_output; 
+        end
+    end
     
     always_comb begin: output_pixel_logic
         if (sum_reg < 0) begin

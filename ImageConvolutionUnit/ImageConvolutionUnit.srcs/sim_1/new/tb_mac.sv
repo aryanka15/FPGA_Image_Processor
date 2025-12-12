@@ -57,28 +57,31 @@ module tb_mac(
         start_conv = 0;
         @(posedge clk);
         @(posedge clk); 
+        @(posedge clk);
         n_rst = 1; 
         @(posedge clk); 
 
         conv_data = small_vector;
         kernel = small_vector;
+        @(posedge clk);
         start_conv = 1; // Assert start
         $display("Test Case 1 started (Expected Output: 225)");
 
         @(posedge clk); // Clock 1: Multiplication registered (Stage 1)
         start_conv = 0; // De-assert start
         
-        repeat (2) @(posedge clk); // Clocks 2 & 3: Wait for output
+        repeat (3) @(posedge clk); // Clocks 2 & 3: Wait for output
     
         conv_data = large_vector;
         kernel = large_vector;
+        @(posedge clk); 
         start_conv = 1; // Assert start
         $display("Test Case 2 started (Expected Output: 255)");
 
         @(posedge clk); // Clock 4: Multiplication registered
         start_conv = 0;
         
-        repeat (2) @(posedge clk); // Clocks 5 & 6: Wait for output
+        repeat (3) @(posedge clk); // Clocks 5 & 6: Wait for output
         
         $finish; 
     end

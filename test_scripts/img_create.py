@@ -3,8 +3,8 @@ import numpy as np
 
 # Parameters
 width, height = 510, 510
-input_file = "lena_new.txt"
-output_file = "lena_new.bmp"
+input_file = "../output/lena_new.txt"
+output_file = "../output/lena_new2.bmp"
 
 # Read pixels
 with open(input_file, "r") as f:
