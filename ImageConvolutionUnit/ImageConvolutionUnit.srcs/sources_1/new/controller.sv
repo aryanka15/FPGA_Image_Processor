@@ -25,7 +25,7 @@ module controller(
     output logic start_conv, shift_en, ren
     );
         
-    typedef enum logic [2:0] {IDLE, READ_INIT, SHIFT_INIT, START_CONV, WAIT_CONV, READ_DATA, SHIFT_DATA} state_t;
+    typedef enum logic [2:0] {IDLE, READ_INIT, SHIFT_INIT, START_CONV, WAIT_DATA} state_t;
     
     state_t state, next_state; 
     
@@ -65,17 +65,26 @@ module controller(
                 cnt_en = 1; 
             end
             SHIFT_INIT: begin
-                shift_en = 1; 
+                shift_en = 1;
+                ren = 1;
+                cnt_en = 1;  
             end
             START_CONV: begin
-                start_conv = 1; 
-            end
-            READ_DATA: begin
+                start_conv = 1;
+                shift_en = 1;
                 ren = 1; 
             end
-            SHIFT_DATA: begin
-                shift_en = 1; 
+            WAIT_DATA: begin
+                start_conv = 1;
+                shift_en = 0;
+                ren = 0; 
             end
+//            READ_DATA: begin
+//                ren = 1; 
+//            end
+//            SHIFT_DATA: begin
+//                shift_en = 1; 
+//            end
             default: begin
                 start_conv = 0; 
                 shift_en = 0;
@@ -100,27 +109,29 @@ module controller(
                 if (cnt_3 == 3'd3) begin
                     next_state = START_CONV; 
                 end
-                else begin
-                    next_state = READ_INIT; 
-                end
             end
             START_CONV: begin
-                next_state = WAIT_CONV; 
+                if (all_empty) begin
+                    next_state = WAIT_DATA; 
+                end 
             end
-            WAIT_CONV: begin
-                if (data_valid & ~all_empty) begin
-                    next_state = READ_DATA; 
-                end
-                else if (data_valid & all_empty) begin
-                    next_state = IDLE; 
-                end
+            WAIT_DATA: begin
+                next_state = IDLE; 
             end
-            READ_DATA: begin
-                next_state = SHIFT_DATA; 
-            end
-            SHIFT_DATA: begin
-                next_state = START_CONV; 
-            end
+//            WAIT_CONV: begin
+//                if (data_valid & ~all_empty) begin
+//                    next_state = READ_DATA; 
+//                end
+//                else if (data_valid & all_empty) begin
+//                    next_state = IDLE; 
+//                end
+//            end
+//            READ_DATA: begin
+//                next_state = SHIFT_DATA; 
+//            end
+//            SHIFT_DATA: begin
+//                next_state = START_CONV; 
+//            end
             default: begin
                 next_state = state;  
             end

@@ -1,22 +1,33 @@
+import argparse
 from PIL import Image
 import numpy as np
 
-# Parameters
-width, height = 510, 510
-input_file = "../output/lena_new.txt"
-output_file = "../output/lena_new2.bmp"
 
-# Read pixels
-with open(input_file, "r") as f:
-    pixels = [int(line.strip()) for line in f]
+def main():
+    parser = argparse.ArgumentParser(description="Create BMP from text pixel list")
+    parser.add_argument("input_file", nargs="?", default="../output/lena_new.txt",
+                        help="Input text file with pixel values (one per line)")
+    parser.add_argument("-o", "--output", default="../output/lena_new2.bmp",
+                        help="Output BMP file path")
+    parser.add_argument("--width", type=int, default=510, help="Image width")
+    parser.add_argument("--height", type=int, default=510, help="Image height")
+    args = parser.parse_args()
 
-if len(pixels) != width*height:
-    raise ValueError(f"Expected {width*height} pixels, got {len(pixels)}")
+    # Read pixels
+    with open(args.input_file, "r") as f:
+        pixels = [int(line.strip()) for line in f if line.strip()]
 
-# Convert to numpy array
-img_array = np.array(pixels, dtype=np.uint8).reshape((height, width))
+    if len(pixels) != args.width * args.height:
+        raise ValueError(f"Expected {args.width*args.height} pixels, got {len(pixels)}")
 
-# Create grayscale image
-img = Image.fromarray(img_array, mode='L')
-img.save(output_file)
-print(f"Saved BMP image to {output_file}")
+    # Convert to numpy array
+    img_array = np.array(pixels, dtype=np.uint8).reshape((args.height, args.width))
+
+    # Create grayscale image
+    img = Image.fromarray(img_array, mode="L")
+    img.save(args.output)
+    print(f"Saved BMP image to {args.output}")
+
+
+if __name__ == "__main__":
+    main()

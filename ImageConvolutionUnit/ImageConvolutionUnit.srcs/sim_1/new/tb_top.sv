@@ -6,6 +6,9 @@ module tb_top;
     logic i_wen, i_start, output_valid;
     logic [7:0] i_wdata_1, i_wdata_2, i_wdata_3;
     logic [7:0] output_pixel;
+    
+    int i, j,z;
+
 
     // DUT
     top DUT (
@@ -55,12 +58,11 @@ module tb_top;
     endtask
 
     initial begin
-        int i, j;
         int a,b,c,d,e,f,g,h,jk;
         int expected;
 
         // Open output file
-        outfile = $fopen("C:\\Users\\karan\\Documents\\GitHub\\ImageProcessor\\output\\lena_new.txt","w");
+        outfile = $fopen("C:\\Users\\karan\\Documents\\GitHub\\ImageProcessor\\output\\clown_new.txt","w");
         if (outfile == 0) begin
             $display("ERROR: Cannot open output file");
             $finish;
@@ -86,11 +88,11 @@ module tb_top;
         };
 
         // Load image
-        read_image_file("C:\\Users\\karan\\Documents\\GitHub\\ImageProcessor\\test_scripts\\image.txt "); // replace with your path
+        read_image_file("C:\\Users\\karan\\Documents\\GitHub\\ImageProcessor\\test_scripts\\clown.txt "); // replace with your path
 
         // Stream image pixels
         for (i = 0; i < IMAGE_HEIGHT-2; i++) begin
-            if (i%10) begin
+            if (i%10==0) begin
                 $display("i: %d", i); 
             end
             for (j = 0; j < IMAGE_WIDTH; j++) begin
@@ -111,12 +113,17 @@ module tb_top;
             @(posedge clk);
             @(negedge clk); 
             i_start = 0;
-
+            @(posedge output_valid);
+            @(negedge clk);
+            $fwrite(outfile,"%0d\n",output_pixel);
             // Capture output pixels
-            for (j = 0; j < IMAGE_WIDTH-2; j++) begin
-                @(posedge output_valid);
-                @(negedge clk); 
-                $fwrite(outfile,"%0d\n",output_pixel);
+            for (z = 1; z < IMAGE_WIDTH-2; z++) begin
+                @(posedge clk);
+                @(negedge clk);
+                if (output_valid)
+                    $fwrite(outfile,"%0d\n",output_pixel);
+                else
+                    z--;
             end
         end
 
