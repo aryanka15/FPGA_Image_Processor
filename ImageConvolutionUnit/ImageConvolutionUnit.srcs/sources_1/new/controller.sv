@@ -21,11 +21,11 @@
 
 
 module controller(
-    input logic clk, n_rst, full_1, empty_1, full_2, empty_2, full_3, empty_3, start, data_valid,
-    output logic start_conv, shift_en, ren
+    input logic clk, n_rst, all_full, all_empty, start, data_valid,
+    output logic start_conv, shift_en, ren, buffer_shift
     );
         
-    typedef enum logic [2:0] {IDLE, READ_INIT, SHIFT_INIT, START_CONV, WAIT_DATA} state_t;
+    typedef enum logic [2:0] {IDLE, READ_INIT, SHIFT_INIT, START_CONV, WAIT_DATA, LAST_DATA} state_t;
     
     state_t state, next_state; 
     
@@ -33,8 +33,7 @@ module controller(
     logic [2:0] cnt_3, nxt_cnt; 
     logic cnt_en;
     
-    assign all_full = full_1 & full_2 & full_3; 
-    assign all_empty = empty_1 & empty_2 & empty_3; 
+    logic [8:0] buffer_shift_counter;  
     
     always_ff @(posedge clk, negedge n_rst) begin
         if (~n_rst) begin
@@ -75,16 +74,15 @@ module controller(
                 ren = 1; 
             end
             WAIT_DATA: begin
+                start_conv = 0;
+                shift_en = 0;
+                ren = 0; 
+            end
+            LAST_DATA: begin
                 start_conv = 1;
                 shift_en = 0;
                 ren = 0; 
             end
-//            READ_DATA: begin
-//                ren = 1; 
-//            end
-//            SHIFT_DATA: begin
-//                shift_en = 1; 
-//            end
             default: begin
                 start_conv = 0; 
                 shift_en = 0;
@@ -112,30 +110,38 @@ module controller(
             end
             START_CONV: begin
                 if (all_empty) begin
-                    next_state = WAIT_DATA; 
+                    next_state = LAST_DATA; 
                 end 
             end
-            WAIT_DATA: begin
-                next_state = IDLE; 
+            LAST_DATA: begin
+                next_state = WAIT_DATA; 
             end
-//            WAIT_CONV: begin
-//                if (data_valid & ~all_empty) begin
-//                    next_state = READ_DATA; 
-//                end
-//                else if (data_valid & all_empty) begin
-//                    next_state = IDLE; 
-//                end
-//            end
-//            READ_DATA: begin
-//                next_state = SHIFT_DATA; 
-//            end
-//            SHIFT_DATA: begin
-//                next_state = START_CONV; 
-//            end
+            WAIT_DATA: begin
+                next_state = data_valid ? WAIT_DATA : IDLE; 
+            end
             default: begin
                 next_state = state;  
             end
         endcase
+    end
+    
+    always_ff @(posedge clk, negedge n_rst) begin: buffer_counter
+        if (~n_rst) begin
+            buffer_shift_counter <= '0; 
+        end
+        else begin
+            if (data_valid) begin
+                buffer_shift_counter <= buffer_shift_counter == 9'd510 ? '0 : buffer_shift_counter + 1; 
+            end
+            else buffer_shift_counter <= '0;
+        end
+    end
+    
+    always_comb begin: shift_logic
+        buffer_shift = 0; 
+        if (buffer_shift_counter == 9'd510) begin
+            buffer_shift = 1; 
+        end
     end
     
 endmodule

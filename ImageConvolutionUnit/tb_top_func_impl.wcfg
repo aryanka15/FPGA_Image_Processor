@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.018610000 ms"></ZoomStartTime>
-      <ZoomEndTime time="13.098610001 ms"></ZoomEndTime>
-      <Cursor1Time time="5.278610000 ms"></Cursor1Time>
+      <ZoomStartTime time="3,992.205000 us"></ZoomStartTime>
+      <ZoomEndTime time="4,010.025001 us"></ZoomEndTime>
+      <Cursor1Time time="3,994.705000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="261"></NameColumnWidth>
-      <ValueColumnWidth column_width="116"></ValueColumnWidth>
+      <ValueColumnWidth column_width="104"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="20" />
+   <WVObjectSize size="30" />
    <wvobject fp_name="/tb_top/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -40,33 +40,9 @@
       <obj_property name="ElementShortName">output_valid</obj_property>
       <obj_property name="ObjectShortName">output_valid</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/i_wdata_1" type="array">
-      <obj_property name="ElementShortName">i_wdata_1[7:0]</obj_property>
-      <obj_property name="ObjectShortName">i_wdata_1[7:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/i_wdata_2" type="array">
-      <obj_property name="ElementShortName">i_wdata_2[7:0]</obj_property>
-      <obj_property name="ObjectShortName">i_wdata_2[7:0]</obj_property>
-   </wvobject>
    <wvobject fp_name="/tb_top/output_pixel" type="array">
       <obj_property name="ElementShortName">output_pixel[7:0]</obj_property>
       <obj_property name="ObjectShortName">output_pixel[7:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/kernel" type="array">
-      <obj_property name="ElementShortName">kernel[0:2][0:2][31:0]</obj_property>
-      <obj_property name="ObjectShortName">kernel[0:2][0:2][31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/outfile" type="array">
-      <obj_property name="ElementShortName">outfile[31:0]</obj_property>
-      <obj_property name="ObjectShortName">outfile[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/IMAGE_WIDTH" type="array">
-      <obj_property name="ElementShortName">IMAGE_WIDTH[31:0]</obj_property>
-      <obj_property name="ObjectShortName">IMAGE_WIDTH[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/IMAGE_HEIGHT" type="array">
-      <obj_property name="ElementShortName">IMAGE_HEIGHT[31:0]</obj_property>
-      <obj_property name="ObjectShortName">IMAGE_HEIGHT[31:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/DUT/control/all_full" type="logic">
       <obj_property name="ElementShortName">all_full</obj_property>
@@ -98,8 +74,72 @@
       <obj_property name="ElementShortName">start_conv</obj_property>
       <obj_property name="ObjectShortName">start_conv</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/DUT/control/ren" type="logic">
+   <wvobject fp_name="/tb_top/DUT/buf1/wptr" type="array">
+      <obj_property name="ElementShortName">wptr[1:0]</obj_property>
+      <obj_property name="ObjectShortName">wptr[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/DUT/buf1/rptr" type="array">
+      <obj_property name="ElementShortName">rptr[1:0]</obj_property>
+      <obj_property name="ObjectShortName">rptr[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/DUT/buf1/ren" type="logic">
       <obj_property name="ElementShortName">ren</obj_property>
       <obj_property name="ObjectShortName">ren</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/DUT/buf1/buffer_shift" type="logic">
+      <obj_property name="ElementShortName">buffer_shift</obj_property>
+      <obj_property name="ObjectShortName">buffer_shift</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/DUT/buf1/wdata" type="array">
+      <obj_property name="ElementShortName">wdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">wdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/DUT/buf1/buffer2/rdata" type="array">
+      <obj_property name="ElementShortName">rdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/DUT/buf1/buffer4/rptr" type="array">
+      <obj_property name="ElementShortName">rptr[9:0]</obj_property>
+      <obj_property name="ObjectShortName">rptr[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/DUT/buf1/write_full" type="logic">
+      <obj_property name="ElementShortName">write_full</obj_property>
+      <obj_property name="ObjectShortName">write_full</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/DUT/buf1/rptr_rst_1" type="logic">
+      <obj_property name="ElementShortName">rptr_rst_1</obj_property>
+      <obj_property name="ObjectShortName">rptr_rst_1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/DUT/buf1/rptr_rst_2" type="logic">
+      <obj_property name="ElementShortName">rptr_rst_2</obj_property>
+      <obj_property name="ObjectShortName">rptr_rst_2</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/DUT/buf1/rptr_rst_3" type="logic">
+      <obj_property name="ElementShortName">rptr_rst_3</obj_property>
+      <obj_property name="ObjectShortName">rptr_rst_3</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/DUT/buf1/rptr_rst_4" type="logic">
+      <obj_property name="ElementShortName">rptr_rst_4</obj_property>
+      <obj_property name="ObjectShortName">rptr_rst_4</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/DUT/control/buffer_shift_counter" type="array">
+      <obj_property name="ElementShortName">buffer_shift_counter[8:0]</obj_property>
+      <obj_property name="ObjectShortName">buffer_shift_counter[8:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/DUT/buf1/buffer3/rptr" type="array">
+      <obj_property name="ElementShortName">rptr[9:0]</obj_property>
+      <obj_property name="ObjectShortName">rptr[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/DUT/buf1/buffer3/wptr" type="array">
+      <obj_property name="ElementShortName">wptr[9:0]</obj_property>
+      <obj_property name="ObjectShortName">wptr[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/DUT/buf1/buffer1/rptr" type="array">
+      <obj_property name="ElementShortName">rptr[9:0]</obj_property>
+      <obj_property name="ObjectShortName">rptr[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/DUT/buf1/buffer1/wptr" type="array">
+      <obj_property name="ElementShortName">wptr[9:0]</obj_property>
+      <obj_property name="ObjectShortName">wptr[9:0]</obj_property>
    </wvobject>
 </wave_config>

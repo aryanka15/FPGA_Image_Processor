@@ -4,10 +4,10 @@ module tb_top;
 
     logic clk, n_rst;
     logic i_wen, i_start, output_valid;
-    logic [7:0] i_wdata_1, i_wdata_2, i_wdata_3;
+    logic [7:0] i_wdata;
     logic [7:0] output_pixel;
     
-    int i, j,z;
+    int i, j,z, k;
 
 
     // DUT
@@ -16,9 +16,7 @@ module tb_top;
         .n_rst(n_rst),
         .i_wen(i_wen),
         .i_start(i_start),
-        .i_wdata_1(i_wdata_1),
-        .i_wdata_2(i_wdata_2),
-        .i_wdata_3(i_wdata_3),
+        .i_wdata(i_wdata),
         .output_pixel(output_pixel),
         .output_valid(output_valid)
     );
@@ -89,24 +87,31 @@ module tb_top;
 
         // Load image
         read_image_file("C:\\Users\\karan\\Documents\\GitHub\\ImageProcessor\\test_scripts\\clown.txt "); // replace with your path
-
+        
+        
         // Stream image pixels
         for (i = 0; i < IMAGE_HEIGHT-2; i++) begin
             if (i%10==0) begin
                 $display("i: %d", i); 
             end
-            for (j = 0; j < IMAGE_WIDTH; j++) begin
-                i_wdata_1 = image[i  ][j];
-                i_wdata_2 = image[i+1][j];
-                i_wdata_3 = image[i+2][j];
-                i_wen = 1;
-                @(negedge clk);
+            
+            // Write logic
+            if (i == 0) begin 
+                k = 0;
             end
-            i_wen = 0;
-            @(posedge clk);
-            @(posedge clk);
-            @(posedge clk);
-            @(posedge clk);
+            else k = 2; 
+            for (; k < 3; k++) begin
+                for (j = 0; j < IMAGE_WIDTH; j++) begin
+                    i_wdata = image[k][j];
+                    i_wen = 1;
+                    @(negedge clk);
+                end 
+                i_wen = 0; 
+                @(negedge clk);
+                @(posedge clk);
+                @(posedge clk);
+                @(posedge clk); 
+            end    
             // Start convolution
             @(negedge clk); 
             i_start = 1;

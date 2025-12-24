@@ -25,30 +25,30 @@ module top (
     input logic clk, 
     input logic n_rst,
     input logic i_wen, i_start,
-    input logic [7:0] i_wdata_1, i_wdata_2, i_wdata_3,
+    input logic [7:0] i_wdata,
     // Output Port (Map this to FPGA pin/LEDs)
     output logic [7:0] output_pixel,
     output logic output_valid
 );
 
     // First signal ff
-    logic [7:0] wdata_1_1, wdata_2_1, wdata_3_1;
+    logic [7:0] wdata_1;
     logic wen_1, start_1; 
 
     // Synced Signals
-    logic [7:0] wdata_1, wdata_2, wdata_3;
+    logic [7:0] wdata;
     logic wen, start; 
 
     // Line Buffer Signals
     logic ren;
-    logic full_1, empty_1;
-    logic full_2, empty_2; 
-    logic full_3, empty_3; 
+    logic all_full, all_empty; 
     logic [7:0] rdata_1, rdata_2, rdata_3; 
     
     // Shift Register Signals
     logic shift_en; 
     logic [71:0] conv_data;   
+    
+    logic buffer_shift; 
     
     // MAC Signals    
 //    localparam [71:0] kernel = {
@@ -82,26 +82,17 @@ module top (
     always_ff @(posedge clk, negedge n_rst) begin
         if (~n_rst) begin
             wdata_1 <= '0; 
-            wdata_2 <= '0; 
-            wdata_3 <= '0;
-            wdata_1_1 <= '0; 
-            wdata_2_1 <= '0; 
-            wdata_3_1 <= '0; 
             wen <= '0;
             start <= '0;
             wen_1 <= '0;
             start_1 <= '0;
         end
         else begin
-            wdata_1_1 <= i_wdata_1; 
-            wdata_2_1 <= i_wdata_2; 
-            wdata_3_1 <= i_wdata_3; 
+            wdata_1 <= i_wdata; 
             wen_1 <= i_wen; 
             start_1 <= i_start; 
             
-            wdata_1 <= wdata_1_1;
-            wdata_2 <= wdata_2_1;
-            wdata_3 <= wdata_3_1;
+            wdata <= wdata_1;
             wen <= wen_1; 
             start <= start_1; 
         end
@@ -110,50 +101,26 @@ module top (
     controller control (
         .clk(clk),
         .n_rst(n_rst),
-        .full_1(full_1),
-        .full_2(full_2),
-        .full_3(full_3),
-        .empty_1(empty_1),
-        .empty_2(empty_2),
-        .empty_3(empty_3),
+        .all_full(all_full),
+        .all_empty(all_empty),
         .start(start),
         .data_valid(output_valid),
         .start_conv(start_conv),
         .shift_en(shift_en),
-        .ren(ren)
-     );
-    
-    line_buffer buffer1 (
-        .clk(clk), 
-        .n_rst(n_rst), 
-        .ren(ren), 
-        .wen(wen), 
-        .wdata(wdata_1), 
-        .empty(empty_1), 
-        .full(full_1), 
-        .rdata(rdata_1)
+        .ren(ren),
+        .buffer_shift
      );
      
-     line_buffer buffer2 (
-        .clk(clk), 
-        .n_rst(n_rst), 
-        .ren(ren), 
-        .wen(wen), 
-        .wdata(wdata_2), 
-        .empty(empty_2), 
-        .full(full_2), 
-        .rdata(rdata_2)
-     );
-     
-     line_buffer buffer3 (
-        .clk(clk), 
-        .n_rst(n_rst), 
-        .ren(ren), 
-        .wen(wen), 
-        .wdata(wdata_3), 
-        .empty(empty_3), 
-        .full(full_3), 
-        .rdata(rdata_3)
+     rolling_buffer buf1 (
+        .clk, 
+        .n_rst, 
+        .wen, 
+        .ren, 
+        .buffer_shift,
+        .wdata, 
+        .all_full, 
+        .all_empty,
+        .rdata_1, .rdata_2, .rdata_3 
      );
      
      shift_reg reg1 (

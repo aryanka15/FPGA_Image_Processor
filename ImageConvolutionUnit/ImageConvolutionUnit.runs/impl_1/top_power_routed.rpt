@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date             : Fri Dec 12 00:03:35 2025
+| Date             : Fri Dec 12 01:21:56 2025
 | Host             : AryanHPLaptop running 64-bit major release  (build 9200)
 | Command          : report_power -file top_power_routed.rpt -pb top_power_summary_routed.pb -rpx top_power_routed.rpx
 | Design           : top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.089        |
+| Total On-Chip Power (W)  | 0.085        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.020        |
+| Dynamic (W)              | 0.016        |
 | Device Static (W)        | 0.069        |
 | Effective TJA (C/W)      | 3.3          |
 | Max Ambient (C)          | 84.7         |
@@ -52,16 +52,16 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.007 |        3 |       --- |             --- |
-| Slice Logic    |     0.002 |      625 |       --- |             --- |
-|   LUT as Logic |     0.002 |      184 |     32600 |            0.56 |
-|   Register     |    <0.001 |      325 |     65200 |            0.50 |
+| Clocks         |     0.006 |        3 |       --- |             --- |
+| Slice Logic    |     0.002 |      617 |       --- |             --- |
+|   LUT as Logic |     0.001 |      183 |     32600 |            0.56 |
+|   Register     |    <0.001 |      322 |     65200 |            0.49 |
 |   CARRY4       |    <0.001 |       23 |      8150 |            0.28 |
 |   Others       |     0.000 |       10 |       --- |             --- |
-| Signals        |     0.003 |      461 |       --- |             --- |
-| Block RAM      |     0.008 |      1.5 |        75 |            2.00 |
+| Signals        |     0.002 |      435 |       --- |             --- |
+| Block RAM      |     0.007 |      1.5 |        75 |            2.00 |
 | Static Power   |     0.069 |          |           |                 |
-| Total          |     0.089 |          |           |                 |
+| Total          |     0.085 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -71,7 +71,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.029 |       0.020 |      0.010 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.026 |       0.016 |      0.010 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -80,7 +80,7 @@ Table of Contents
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vccbram   |       1.000 |     0.001 |       0.001 |      0.000 |       NA    | Unspecified | NA         |
+| Vccbram   |       1.000 |     0.001 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |       NA    | Unspecified | NA         |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 
@@ -138,11 +138,11 @@ Table of Contents
 +--------------+-----------+
 | Name         | Power (W) |
 +--------------+-----------+
-| top          |     0.020 |
-|   buffer1    |     0.004 |
-|   buffer2    |     0.004 |
-|   buffer3    |     0.004 |
-|   conv_block |     0.004 |
+| top          |     0.016 |
+|   buffer1    |     0.003 |
+|   buffer2    |     0.003 |
+|   buffer3    |     0.003 |
+|   conv_block |     0.003 |
 +--------------+-----------+
 
 

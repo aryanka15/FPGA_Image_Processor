@@ -3,6 +3,7 @@
 module line_buffer #(parameter SIZE=512) (
     input  logic        clk,
     input  logic        n_rst,
+    input  logic        rptr_rst,
     input  logic        ren,
     input  logic        wen,
     input  logic [7:0]  wdata,
@@ -27,7 +28,7 @@ module line_buffer #(parameter SIZE=512) (
     assign raddr = rptr[ADDR_BITS-1:0];
 
     assign nxt_wptr = wptr + (wen & ~full); 
-    assign nxt_rptr = rptr + (ren & ~empty); 
+    assign nxt_rptr = rptr_rst ? {~nxt_wptr[ADDR_BITS], nxt_wptr[ADDR_BITS-1:0]} : rptr + (ren & ~empty); 
     
 
     always_ff @(posedge clk) begin
@@ -36,6 +37,7 @@ module line_buffer #(parameter SIZE=512) (
     end
 
     always_ff @(posedge clk) begin
+        rdata <= '0; 
         if (ren & ~empty)
             rdata <= mem[raddr];
     end
