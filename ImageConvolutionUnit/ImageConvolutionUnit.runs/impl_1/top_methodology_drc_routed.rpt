@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date         : Fri Dec 12 01:21:56 2025
+| Date         : Wed Dec 24 15:14:21 2025
 | Host         : AryanHPLaptop running 64-bit major release  (build 9200)
 | Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
 | Design       : top
@@ -20,32 +20,37 @@ Table of Contents
 1. REPORT SUMMARY
 -----------------
             Netlist: netlist
-          Floorplan: design_1
+          Floorplan: checkpoint_top
       Design limits: <entire design considered>
              Max checks: <unlimited>
-             Checks found: 39
+             Checks found: 24
 +-----------+----------+--------------------------------------------+--------+
 | Rule      | Severity | Description                                | Checks |
 +-----------+----------+--------------------------------------------+--------+
-| SYNTH-6   | Warning  | Timing of a RAM block might be sub-optimal | 3      |
-| TIMING-18 | Warning  | Missing input or output delay              | 36     |
+| SYNTH-6   | Warning  | Timing of a RAM block might be sub-optimal | 4      |
+| TIMING-18 | Warning  | Missing input or output delay              | 20     |
 +-----------+----------+--------------------------------------------+--------+
 
 2. REPORT DETAILS
 -----------------
 SYNTH-6#1 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance buffer1/mem_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance buf1/buffer1/mem_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#2 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance buffer2/mem_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance buf1/buffer2/mem_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#3 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance buffer3/mem_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance buf1/buffer3/mem_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#4 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance buf1/buffer4/mem_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 TIMING-18#1 Warning
@@ -55,175 +60,95 @@ Related violations: <none>
 
 TIMING-18#2 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_1[0] relative to the rising and/or falling clock edge(s) of clk.
+An input delay is missing on i_wdata[0] relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#3 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_1[1] relative to the rising and/or falling clock edge(s) of clk.
+An input delay is missing on i_wdata[1] relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#4 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_1[2] relative to the rising and/or falling clock edge(s) of clk.
+An input delay is missing on i_wdata[2] relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#5 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_1[3] relative to the rising and/or falling clock edge(s) of clk.
+An input delay is missing on i_wdata[3] relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#6 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_1[4] relative to the rising and/or falling clock edge(s) of clk.
+An input delay is missing on i_wdata[4] relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#7 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_1[5] relative to the rising and/or falling clock edge(s) of clk.
+An input delay is missing on i_wdata[5] relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#8 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_1[6] relative to the rising and/or falling clock edge(s) of clk.
+An input delay is missing on i_wdata[6] relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#9 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_1[7] relative to the rising and/or falling clock edge(s) of clk.
+An input delay is missing on i_wdata[7] relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#10 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_2[0] relative to the rising and/or falling clock edge(s) of clk.
+An input delay is missing on i_wen relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#11 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_2[1] relative to the rising and/or falling clock edge(s) of clk.
+An input delay is missing on n_rst relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#12 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_2[2] relative to the rising and/or falling clock edge(s) of clk.
+An output delay is missing on output_pixel[0] relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#13 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_2[3] relative to the rising and/or falling clock edge(s) of clk.
+An output delay is missing on output_pixel[1] relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#14 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_2[4] relative to the rising and/or falling clock edge(s) of clk.
+An output delay is missing on output_pixel[2] relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#15 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_2[5] relative to the rising and/or falling clock edge(s) of clk.
+An output delay is missing on output_pixel[3] relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#16 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_2[6] relative to the rising and/or falling clock edge(s) of clk.
+An output delay is missing on output_pixel[4] relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#17 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_2[7] relative to the rising and/or falling clock edge(s) of clk.
+An output delay is missing on output_pixel[5] relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#18 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_3[0] relative to the rising and/or falling clock edge(s) of clk.
+An output delay is missing on output_pixel[6] relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
 TIMING-18#19 Warning
 Missing input or output delay  
-An input delay is missing on i_wdata_3[1] relative to the rising and/or falling clock edge(s) of clk.
-Related violations: <none>
-
-TIMING-18#20 Warning
-Missing input or output delay  
-An input delay is missing on i_wdata_3[2] relative to the rising and/or falling clock edge(s) of clk.
-Related violations: <none>
-
-TIMING-18#21 Warning
-Missing input or output delay  
-An input delay is missing on i_wdata_3[3] relative to the rising and/or falling clock edge(s) of clk.
-Related violations: <none>
-
-TIMING-18#22 Warning
-Missing input or output delay  
-An input delay is missing on i_wdata_3[4] relative to the rising and/or falling clock edge(s) of clk.
-Related violations: <none>
-
-TIMING-18#23 Warning
-Missing input or output delay  
-An input delay is missing on i_wdata_3[5] relative to the rising and/or falling clock edge(s) of clk.
-Related violations: <none>
-
-TIMING-18#24 Warning
-Missing input or output delay  
-An input delay is missing on i_wdata_3[6] relative to the rising and/or falling clock edge(s) of clk.
-Related violations: <none>
-
-TIMING-18#25 Warning
-Missing input or output delay  
-An input delay is missing on i_wdata_3[7] relative to the rising and/or falling clock edge(s) of clk.
-Related violations: <none>
-
-TIMING-18#26 Warning
-Missing input or output delay  
-An input delay is missing on i_wen relative to the rising and/or falling clock edge(s) of clk.
-Related violations: <none>
-
-TIMING-18#27 Warning
-Missing input or output delay  
-An input delay is missing on n_rst relative to the rising and/or falling clock edge(s) of clk.
-Related violations: <none>
-
-TIMING-18#28 Warning
-Missing input or output delay  
-An output delay is missing on output_pixel[0] relative to the rising and/or falling clock edge(s) of clk.
-Related violations: <none>
-
-TIMING-18#29 Warning
-Missing input or output delay  
-An output delay is missing on output_pixel[1] relative to the rising and/or falling clock edge(s) of clk.
-Related violations: <none>
-
-TIMING-18#30 Warning
-Missing input or output delay  
-An output delay is missing on output_pixel[2] relative to the rising and/or falling clock edge(s) of clk.
-Related violations: <none>
-
-TIMING-18#31 Warning
-Missing input or output delay  
-An output delay is missing on output_pixel[3] relative to the rising and/or falling clock edge(s) of clk.
-Related violations: <none>
-
-TIMING-18#32 Warning
-Missing input or output delay  
-An output delay is missing on output_pixel[4] relative to the rising and/or falling clock edge(s) of clk.
-Related violations: <none>
-
-TIMING-18#33 Warning
-Missing input or output delay  
-An output delay is missing on output_pixel[5] relative to the rising and/or falling clock edge(s) of clk.
-Related violations: <none>
-
-TIMING-18#34 Warning
-Missing input or output delay  
-An output delay is missing on output_pixel[6] relative to the rising and/or falling clock edge(s) of clk.
-Related violations: <none>
-
-TIMING-18#35 Warning
-Missing input or output delay  
 An output delay is missing on output_pixel[7] relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>
 
-TIMING-18#36 Warning
+TIMING-18#20 Warning
 Missing input or output delay  
 An output delay is missing on output_valid relative to the rising and/or falling clock edge(s) of clk.
 Related violations: <none>

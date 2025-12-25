@@ -21,14 +21,15 @@ module line_buffer #(parameter SIZE=512) (
     logic [ADDR_BITS:0] nxt_wptr, nxt_rptr;
 
     logic [ADDR_BITS-1:0] waddr, raddr;
-    
+    logic [ADDR_BITS:0] rptr_inverted; 
+
     logic full_n, empty_n;  
 
     assign waddr = wptr[ADDR_BITS-1:0];
     assign raddr = rptr[ADDR_BITS-1:0];
 
     assign nxt_wptr = wptr + (wen & ~full); 
-    assign nxt_rptr = rptr_rst ? {~nxt_wptr[ADDR_BITS], nxt_wptr[ADDR_BITS-1:0]} : rptr + (ren & ~empty); 
+    assign nxt_rptr = rptr + (ren & ~empty); 
     
 
     always_ff @(posedge clk) begin
@@ -43,10 +44,31 @@ module line_buffer #(parameter SIZE=512) (
     end
 
     always_comb begin
-        full_n = 1'b0;
-        empty_n = (nxt_wptr == nxt_rptr); 
-        if ((nxt_wptr[ADDR_BITS-1:0] == nxt_rptr[ADDR_BITS-1:0]) && (nxt_wptr[ADDR_BITS] != nxt_rptr[ADDR_BITS]))
-            full_n = 1;
+        empty_n = empty; 
+        full_n = full;
+        
+        if (rptr_rst) begin
+            empty_n = 1'b0;
+            full_n = 1'b1; 
+        end
+        
+        else if (wen & ~full) begin
+            empty_n = 1'b0;
+            rptr_inverted = {~rptr[ADDR_BITS], rptr[ADDR_BITS-1:0]};
+            if ((wptr + 1'b1) == rptr_inverted)
+                full_n = 1'b1;
+            else
+                full_n = 1'b0; 
+        end
+        else if (ren & ~empty) begin
+            full_n = 1'b0; 
+            if ((rptr + 1'b1) == wptr) begin
+                empty_n = 1'b1;
+            end
+            else begin
+                empty_n = 1'b0; 
+            end
+        end
     end
 
     always_ff @(posedge clk) begin
@@ -57,7 +79,7 @@ module line_buffer #(parameter SIZE=512) (
             full <= 0;
         end else begin
             wptr <= nxt_wptr;
-            rptr <= nxt_rptr;
+            rptr <= rptr_rst ? {~nxt_wptr[ADDR_BITS], nxt_wptr[ADDR_BITS-1:0]} : nxt_rptr;
             empty <= empty_n;
             full <= full_n;
         end

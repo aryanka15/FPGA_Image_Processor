@@ -138,10 +138,7 @@ module controller(
     end
     
     always_comb begin: shift_logic
-        buffer_shift = 0; 
-        if (buffer_shift_counter == 9'd510) begin
-            buffer_shift = 1; 
-        end
+        buffer_shift = buffer_shift_counter == 9'd510;
     end
     
 endmodule

@@ -56,6 +56,7 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param chipscope.maxJobs 5
 set_param general.usePosixSpawnForFork 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7s50ftgb196-1
@@ -75,6 +76,7 @@ read_verilog -library xil_defaultlib -sv {
   C:/Users/karan/Documents/GitHub/ImageProcessor/ImageConvolutionUnit/ImageConvolutionUnit.srcs/sources_1/new/controller.sv
   C:/Users/karan/Documents/GitHub/ImageProcessor/ImageConvolutionUnit/ImageConvolutionUnit.srcs/sources_1/new/line_buffer.sv
   C:/Users/karan/Documents/GitHub/ImageProcessor/ImageConvolutionUnit/ImageConvolutionUnit.srcs/sources_1/new/mac.sv
+  C:/Users/karan/Documents/GitHub/ImageProcessor/ImageConvolutionUnit/ImageConvolutionUnit.srcs/sources_1/new/rolling_buffer.sv
   C:/Users/karan/Documents/GitHub/ImageProcessor/ImageConvolutionUnit/ImageConvolutionUnit.srcs/sources_1/new/shift_reg.sv
   C:/Users/karan/Documents/GitHub/ImageProcessor/ImageConvolutionUnit/ImageConvolutionUnit.srcs/sources_1/new/top.sv
 }
