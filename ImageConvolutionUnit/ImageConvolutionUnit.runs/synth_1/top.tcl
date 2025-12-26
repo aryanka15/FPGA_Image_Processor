@@ -98,7 +98,7 @@ read_checkpoint -auto_incremental -incremental C:/Users/karan/Documents/GitHub/I
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top top -part xc7s50ftgb196-1 -mode out_of_context
+synth_design -top top -part xc7s50ftgb196-1
 OPTRACE "synth_design" END { }
 if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
  send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"

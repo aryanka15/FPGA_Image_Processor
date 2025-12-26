@@ -133,7 +133,7 @@ module mac(
     
     always_comb begin: output_pixel_logic
         if (sum_reg < 0) begin
-            sum_output = 8'd0; 
+            sum_output = ~sum_reg + 1'b1; 
         end
         else if (sum_reg > 255) begin
             sum_output = 8'd255; 

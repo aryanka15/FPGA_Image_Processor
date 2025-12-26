@@ -60,3 +60,13 @@ Post implementation simulation waveform
 ![waveform](./rtl_diagrams/waveform_ex.jpg)
 
 i_start going high activates the MAC and shifting of data from the line buffer into the shift registers. You can see wen high and wdata because a line can be streamed into the line buffers as the convolution takes place. Streaming must be paused after one line, until all 510 pixels of output have been read. 
+
+## Example Input -> Output
+Input Image: 
+![clown_image](/test_scripts/clown.bmp)
+
+Output Image with Vertical Sobel Edge Filter: 
+![clown_image_filtered](/output/clown_filtered.bmp)
+
+Output Image from Software (img_filter.py script): 
+![clown_image_sw_filter](/test_scripts/clown_horizontal_sw.bmp)
