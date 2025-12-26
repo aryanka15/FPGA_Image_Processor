@@ -1,6 +1,8 @@
 # FPGA_Image_Processor
 An FPGA-based Image Processing Unit (Kernel Convolution). Runs at 200 MHz (verified in post-implementation simulation, not on actual hardware... yet)
 
+In simulation, filtered a 512x512 image in about 1,230 microseconds, or 0.001 seconds
+
 Main Purpose: Apply a 3x3 kernel filter to a 512x512 grayscale image
 
 Next Steps: Dynamic filter loading, larger images, RGB images, create user function that manages the input signals given a BMP image (for a microprocessor like Zynq)
