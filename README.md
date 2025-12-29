@@ -71,10 +71,13 @@ i_start going high activates the MAC and shifting of data from the line buffer i
 
 ## Example Input -> Output
 Input Image: 
+
 ![clown_image](/test_scripts/clown.bmp)
 
 Output Image with Vertical Sobel Edge Filter: 
+
 ![clown_image_filtered](/output/clown_filtered.bmp)
 
 Output Image from Software (img_filter.py script): 
+
 ![clown_image_sw_filter](/test_scripts/clown_horizontal_sw.bmp)
