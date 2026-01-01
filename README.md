@@ -13,7 +13,7 @@ More information on my blog:
 
 Part 1 - https://aryan-karani.vercel.app/blog/fpga-image-convolution-accelerator-part-1
 
-Part 2 - Coming Soon!
+Part 2 - https://aryan-karani.vercel.app/blog/fpga-image-convolution-accelerator-part-2
 
 Part 3 - Coming Soon!
 
