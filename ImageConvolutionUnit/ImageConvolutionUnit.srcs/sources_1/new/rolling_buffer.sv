@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
-// Engineer: 
+// Engineer: Aryan Karani
 // 
 // Create Date: 12/13/2025 12:53:34 AM
 // Design Name: 
@@ -9,9 +9,10 @@
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
-// Description: 
+// Description: Rolling buffer module that manages four line buffers in a circular fashion. 
+//It handles writing to and reading from the buffers, and shifts the buffers when needed.
 // 
-// Dependencies: 
+// Dependencies: line_buffer
 // 
 // Revision:
 // Revision 0.01 - File Created
@@ -19,24 +20,22 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
-// TODO: After buffers 1,2,3 are used they will be marked as empty. need to reset rptr when the buffers shift so that 
-// we can read from them again
-
 module rolling_buffer(
     input logic clk, n_rst, wen, ren, buffer_shift,
-    input logic [7:0] wdata, 
+    input logic [31:0] wdata, 
     output logic all_full, all_empty,
-    output logic [7:0] rdata_1, rdata_2, rdata_3
+    output logic [31:0] rdata_1, rdata_2, rdata_3
     );
     
     logic [1:0] wptr, rptr;  
     
     logic write_full;     
+
+    // Wen/Ren/Full/Empty/rptr_rst/wdata signals for each buffer
     logic wen_buf_1, wen_buf_2, wen_buf_3, wen_buf_4, ren_buf_1, ren_buf_2, ren_buf_3, ren_buf_4; 
     logic full_buf_1, full_buf_2, full_buf_3, full_buf_4, empty_buf_1, empty_buf_2, empty_buf_3, empty_buf_4;
     logic rptr_rst_1, rptr_rst_2, rptr_rst_3, rptr_rst_4;
-    logic [7:0] wdata_buf_1, wdata_buf_2, wdata_buf_3, wdata_buf_4, rdata_buf_1, rdata_buf_2, rdata_buf_3, rdata_buf_4;
+    logic [31:0] wdata_buf_1, wdata_buf_2, wdata_buf_3, wdata_buf_4, rdata_buf_1, rdata_buf_2, rdata_buf_3, rdata_buf_4;
     
     line_buffer buffer1 (
         .clk(clk), 
@@ -86,6 +85,7 @@ module rolling_buffer(
         .rdata(rdata_buf_4)
      );
      
+     // Logic to determine if all buffers being read from are empty/full or need to be rptr_rst
      always_comb begin: empty_full_logic
         all_full = 0;
         all_empty = 0;
@@ -137,6 +137,7 @@ module rolling_buffer(
         endcase     
      end
      
+     // Determines the wen, wdata, and full signal based on the buffer being written to currently
      always_comb begin: wen_logic
         wen_buf_1 = 0;
         wen_buf_2 = 0;
@@ -182,6 +183,7 @@ module rolling_buffer(
         endcase
      end
      
+     // Determines the ren and rdata signals based on the buffer being read from currently
      always_comb begin: ren_logic
         ren_buf_1 = 0; 
         ren_buf_2 = 0; 
@@ -235,6 +237,7 @@ module rolling_buffer(
         endcase
      end
      
+     // Logic to update the write and read pointers based on buffer shift and write_full signals
      always_ff @(posedge clk, negedge n_rst) begin: pointer_logic
         if (~n_rst) begin
             wptr <= '0;

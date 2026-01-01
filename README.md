@@ -1,11 +1,13 @@
 # FPGA_Image_Processor
 An FPGA-based Image Processing Unit (Kernel Convolution). Runs at 200 MHz (verified in post-implementation simulation, not on actual hardware... yet)
 
-In simulation, filtered a 512x512 image in about 1,230 microseconds, or 0.001 seconds
+In simulation, filtered a 512x512 image in about 0.36 microseconds, or 0.00036 seconds. That's almost 3,000 fps. This includes kernel loading time. 
+
+This previously finished in 1.2 microseconds, but I improved it from 8-bit bus widths to 32-bit buses and 4 parallel convolutions to input and output 4 pixels per cycle rather than 1 pixel per cycle. 
 
 Main Purpose: Apply a 3x3 kernel filter to a 512x512 grayscale image
 
-Next Steps: Dynamic filter loading, larger images, RGB images, create user function that manages the input signals given a BMP image (for a microprocessor like Zynq)
+Next Steps: Dynamic filter loading (DONE), larger images, RGB images, create user function that manages the input signals given a BMP image (for a microprocessor like Zynq)
 
 ## Files: 
 
@@ -17,11 +19,13 @@ The files described below are the source files for the image processing unit. As
 
 **controller.sv** - The controller is implemented as an FSM with six states. Controls the MAC, shift registers, and reading from the data buffer
 
-**rolling_buffer.sv** - A data buffer consisting of four FIFO's. The default configuration is a size of 512
+**rolling_buffer.sv** - A data buffer consisting of four FIFO's. The default configuration is a size of 128 (4 pixels for each 'element' in buffer)
 
 **line_buffer.sv** - The FIFO implementation
 
 **mac.sv** - The multiply and accumulate to perform element-wise multiplication between the kernel and the data from the shift registers, then adds the elements. Pipelined for better throughput
+
+**kernel_buffer.sv** - Similar to the shift register, but takes a 24-bit inputs (each kernel row) to store a kernel array
 
 ### Other Files:
 
@@ -39,25 +43,25 @@ Not the best diagrams, but should be enough to understand the basic functioanali
 
 ### Top Level
 
-![top_rtl](./rtl_diagrams/top.png)
+![top_rtl](./diagrams/top.png)
 
 ### Controller
 
-![controller_rtl](./rtl_diagrams/controller.png)
+![controller_rtl](./diagrams/controller.png)
 
 ### Rolling Data Buffer
-![rolling_data_buffer_rtl](./rtl_diagrams/rolling_buffer.png)
+![rolling_data_buffer_rtl](./diagrams/rolling_buffer.png)
 
 ### Line Buffer
-![line_buffer_rtl](./rtl_diagrams/line_buffer.png)
+![line_buffer_rtl](./diagrams/line_buffer.png)
 
 ### MAC Unit
-![mac_rtl](./rtl_diagrams/mac.png)
+![mac_rtl](./diagrams/mac.png)
 
 ## Example Waveform
 
 Post implementation simulation waveform
-![waveform](./rtl_diagrams/waveform_ex.jpg)
+![waveform](./diagrams/waveform_ex.jpg)
 
 i_start going high activates the MAC and shifting of data from the line buffer into the shift registers. You can see wen high and wdata because a line can be streamed into the line buffers as the convolution takes place. Streaming must be paused after one line, until all 510 pixels of output have been read. 
 
@@ -65,8 +69,10 @@ i_start going high activates the MAC and shifting of data from the line buffer i
 Input Image: 
 ![clown_image](/test_scripts/clown.bmp)
 
-Output Image with Vertical Sobel Edge Filter: 
+Output Image with Laplacian Edge Detection Filter: 
 ![clown_image_filtered](/output/clown_filtered.bmp)
 
 Output Image from Software (img_filter.py script): 
-![clown_image_sw_filter](/test_scripts/clown_horizontal_sw.bmp)
+![clown_image_sw_filter](/output/clown_horizontal_sw.bmp)
+
+(There's a slight brightness/contrast difference, maybe due to the kernel that OpenCV uses versus my testbench. The Sobel filters look identical)

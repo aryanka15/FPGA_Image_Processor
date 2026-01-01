@@ -3,7 +3,7 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="tb_top_time_impl.wdb" id="1">
+      <db_ref path="tb_top_behav.wdb" id="1">
          <top_modules>
             <top_module name="glbl" />
             <top_module name="tb_top" />
@@ -11,13 +11,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="52,006.650 ns"></ZoomStartTime>
-      <ZoomEndTime time="52,464.151 ns"></ZoomEndTime>
-      <Cursor1Time time="52,053.150 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
+      <ZoomEndTime time="452.975216 us"></ZoomEndTime>
+      <Cursor1Time time="342.649500 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="251"></NameColumnWidth>
-      <ValueColumnWidth column_width="90"></ValueColumnWidth>
+      <NameColumnWidth column_width="448"></NameColumnWidth>
+      <ValueColumnWidth column_width="150"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="7" />
    <wvobject fp_name="/tb_top/clk" type="logic">
@@ -33,8 +33,8 @@
       <obj_property name="ObjectShortName">i_start</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/i_wdata" type="array">
-      <obj_property name="ElementShortName">i_wdata[7:0]</obj_property>
-      <obj_property name="ObjectShortName">i_wdata[7:0]</obj_property>
+      <obj_property name="ElementShortName">i_wdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">i_wdata[31:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/i_wen" type="logic">
       <obj_property name="ElementShortName">i_wen</obj_property>
@@ -45,7 +45,7 @@
       <obj_property name="ObjectShortName">output_valid</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/output_pixel" type="array">
-      <obj_property name="ElementShortName">output_pixel[7:0]</obj_property>
-      <obj_property name="ObjectShortName">output_pixel[7:0]</obj_property>
+      <obj_property name="ElementShortName">output_pixel[31:0]</obj_property>
+      <obj_property name="ObjectShortName">output_pixel[31:0]</obj_property>
    </wvobject>
 </wave_config>

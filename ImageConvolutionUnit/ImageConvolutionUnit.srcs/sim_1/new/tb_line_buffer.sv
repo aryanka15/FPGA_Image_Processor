@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
-// Engineer: 
+// Engineer: Aryan Karani
 // 
 // Create Date: 11/26/2025 09:48:09 PM
 // Design Name: 
@@ -15,7 +15,7 @@
 // 
 // Revision:
 // Revision 0.01 - File Created
-// Additional Comments:
+// Additional Comments: Deprecated - created for 8-bit line buffer, new design uses 32 bit line buffer
 // 
 //////////////////////////////////////////////////////////////////////////////////
 

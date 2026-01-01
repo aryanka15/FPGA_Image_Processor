@@ -1,6 +1,6 @@
 -------------------------------------
 | Tool Version : Vivado v.2025.1
-| Date         : Thu Dec 25 21:39:15 2025
+| Date         : Thu Jan  1 02:48:41 2026
 | Host         : AryanHPLaptop
 | Design       : design_1
 | Device       : xc7s50-ftgb196-1--

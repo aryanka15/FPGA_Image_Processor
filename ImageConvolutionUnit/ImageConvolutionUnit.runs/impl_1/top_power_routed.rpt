@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date             : Thu Dec 25 21:39:59 2025
+| Date             : Thu Jan  1 02:49:21 2026
 | Host             : AryanHPLaptop running 64-bit major release  (build 9200)
 | Command          : report_power -file top_power_routed.rpt -pb top_power_summary_routed.pb -rpx top_power_routed.rpx
 | Design           : top
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.094        |
+| Total On-Chip Power (W)  | 0.183        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.023        |
+| Dynamic (W)              | 0.113        |
 | Device Static (W)        | 0.070        |
 | Effective TJA (C/W)      | 3.3          |
-| Max Ambient (C)          | 84.7         |
-| Junction Temperature (C) | 25.3         |
+| Max Ambient (C)          | 84.4         |
+| Junction Temperature (C) | 25.6         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,17 +52,18 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.004 |        3 |       --- |             --- |
-| Slice Logic    |     0.002 |      796 |       --- |             --- |
-|   LUT as Logic |     0.002 |      336 |     32600 |            1.03 |
-|   Register     |    <0.001 |      325 |     65200 |            0.50 |
-|   CARRY4       |    <0.001 |       25 |      8150 |            0.31 |
-|   Others       |     0.000 |       14 |       --- |             --- |
-| Signals        |     0.003 |      584 |       --- |             --- |
-| Block RAM      |     0.009 |        2 |        75 |            2.67 |
-| I/O            |     0.006 |       21 |       100 |           21.00 |
+| Clocks         |     0.012 |        3 |       --- |             --- |
+| Slice Logic    |     0.005 |     1403 |       --- |             --- |
+|   LUT as Logic |     0.004 |      605 |     32600 |            1.86 |
+|   Register     |    <0.001 |      644 |     65200 |            0.99 |
+|   CARRY4       |    <0.001 |        4 |      8150 |            0.05 |
+|   Others       |     0.000 |       30 |       --- |             --- |
+| Signals        |     0.015 |     2780 |       --- |             --- |
+| Block RAM      |     0.007 |        2 |        75 |            2.67 |
+| DSPs           |     0.048 |       40 |       120 |           33.33 |
+| I/O            |     0.026 |       71 |       100 |           71.00 |
 | Static Power   |     0.070 |          |           |                 |
-| Total          |     0.094 |          |           |                 |
+| Total          |     0.183 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -72,16 +73,16 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.027 |       0.017 |      0.010 |       NA    | Unspecified | NA         |
-| Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.097 |       0.087 |      0.010 |       NA    | Unspecified | NA         |
+| Vccaux    |       1.800 |     0.015 |       0.002 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vcco18    |       1.800 |     0.004 |       0.003 |      0.001 |       NA    | Unspecified | NA         |
+| Vcco18    |       1.800 |     0.013 |       0.012 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vccbram   |       1.000 |     0.001 |       0.001 |      0.000 |       NA    | Unspecified | NA         |
+| Vccbram   |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |       NA    | Unspecified | NA         |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 
@@ -136,16 +137,24 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+--------------+-----------+
-| Name         | Power (W) |
-+--------------+-----------+
-| top          |     0.023 |
-|   buf1       |     0.012 |
-|     buffer1  |     0.003 |
-|     buffer2  |     0.003 |
-|     buffer3  |     0.003 |
-|     buffer4  |     0.003 |
-|   conv_block |     0.003 |
-+--------------+-----------+
++---------------+-----------+
+| Name          | Power (W) |
++---------------+-----------+
+| top           |     0.113 |
+|   buf1        |     0.013 |
+|     buffer1   |     0.003 |
+|     buffer2   |     0.003 |
+|     buffer3   |     0.003 |
+|     buffer4   |     0.004 |
+|   control     |     0.002 |
+|   conv_block1 |     0.014 |
+|   conv_block2 |     0.015 |
+|   conv_block3 |     0.014 |
+|   conv_block4 |     0.015 |
+|   kern_buf    |     0.004 |
+|   reg1        |     0.002 |
+|   reg2        |     0.002 |
+|   reg3        |     0.002 |
++---------------+-----------+
 
 

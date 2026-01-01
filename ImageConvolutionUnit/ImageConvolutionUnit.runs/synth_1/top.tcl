@@ -56,8 +56,11 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param chipscope.maxJobs 5
 set_param general.usePosixSpawnForFork 1
+set_param synth.incrementalSynthesisCache C:/Users/karan/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-20252-AryanHPLaptop/incrSyn
+set_param checkpoint.writeSynthRtdsInDcp 1
+set_msg_config -id {Synth 8-256} -limit 10000
+set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7s50ftgb196-1
 
@@ -74,6 +77,7 @@ OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib -sv {
   C:/Users/karan/Documents/GitHub/ImageProcessor/ImageConvolutionUnit/ImageConvolutionUnit.srcs/sources_1/new/controller.sv
+  C:/Users/karan/Documents/GitHub/ImageProcessor/ImageConvolutionUnit/ImageConvolutionUnit.srcs/sources_1/new/kernel_buffer.sv
   C:/Users/karan/Documents/GitHub/ImageProcessor/ImageConvolutionUnit/ImageConvolutionUnit.srcs/sources_1/new/line_buffer.sv
   C:/Users/karan/Documents/GitHub/ImageProcessor/ImageConvolutionUnit/ImageConvolutionUnit.srcs/sources_1/new/mac.sv
   C:/Users/karan/Documents/GitHub/ImageProcessor/ImageConvolutionUnit/ImageConvolutionUnit.srcs/sources_1/new/rolling_buffer.sv
@@ -98,7 +102,7 @@ read_checkpoint -auto_incremental -incremental C:/Users/karan/Documents/GitHub/I
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top top -part xc7s50ftgb196-1
+synth_design -top top -part xc7s50ftgb196-1 -directive PerformanceOptimized -fsm_extraction one_hot -keep_equivalent_registers -resource_sharing off -no_lc -shreg_min_size 5
 OPTRACE "synth_design" END { }
 if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
  send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"

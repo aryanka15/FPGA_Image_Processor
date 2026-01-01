@@ -97,6 +97,8 @@ proc step_failed { step } {
 OPTRACE "impl_1" END { }
 }
 
+set_msg_config -id {Synth 8-256} -limit 10000
+set_msg_config -id {Synth 8-638} -limit 10000
 
 OPTRACE "impl_1" START { ROLLUP_1 }
 OPTRACE "Phase: Init Design" START { ROLLUP_AUTO }
@@ -106,6 +108,8 @@ set rc [catch {
   create_msg_db init_design.pb
   set_param chipscope.maxJobs 5
   set_param general.usePosixSpawnForFork 1
+  set_param synth.incrementalSynthesisCache C:/Users/karan/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-20252-AryanHPLaptop/incrSyn
+  set_param checkpoint.writeSynthRtdsInDcp 1
   set_param runs.launchOptions { -jobs 10  }
 OPTRACE "create in-memory project" START { }
   create_project -in_memory -part xc7s50ftgb196-1
@@ -154,7 +158,7 @@ set rc [catch {
 OPTRACE "read constraints: opt_design" START { }
 OPTRACE "read constraints: opt_design" END { }
 OPTRACE "opt_design" START { }
-  opt_design 
+  opt_design -directive Explore
 OPTRACE "opt_design" END { }
 OPTRACE "read constraints: opt_design_post" START { }
 OPTRACE "read constraints: opt_design_post" END { }
@@ -191,7 +195,7 @@ OPTRACE "implement_debug_core" END { }
   } 
 OPTRACE "place_design" START { }
   set_param project.isImplRun true
-  place_design 
+  place_design -directive Explore
   set_param project.isImplRun false
 OPTRACE "place_design" END { }
 OPTRACE "read constraints: place_design_post" START { }
@@ -223,7 +227,7 @@ set rc [catch {
 OPTRACE "read constraints: phys_opt_design" START { }
 OPTRACE "read constraints: phys_opt_design" END { }
 OPTRACE "phys_opt_design" START { }
-  phys_opt_design 
+  phys_opt_design -directive Explore
 OPTRACE "phys_opt_design" END { }
 OPTRACE "read constraints: phys_opt_design_post" START { }
 OPTRACE "read constraints: phys_opt_design_post" END { }
@@ -251,7 +255,7 @@ set rc [catch {
 OPTRACE "read constraints: route_design" START { }
 OPTRACE "read constraints: route_design" END { }
 OPTRACE "route_design" START { }
-  route_design 
+  route_design -directive Explore
 OPTRACE "route_design" END { }
 OPTRACE "read constraints: route_design_post" START { }
 OPTRACE "read constraints: route_design_post" END { }

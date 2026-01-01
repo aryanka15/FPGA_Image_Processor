@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date         : Thu Dec 25 21:39:12 2025
+| Date         : Thu Jan  1 02:48:38 2026
 | Host         : AryanHPLaptop running 64-bit major release  (build 9200)
 | Command      : report_drc -file top_drc_opted.rpt -pb top_drc_opted.pb -rpx top_drc_opted.rpx
 | Design       : top
@@ -24,7 +24,7 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max checks: <unlimited>
-             Checks found: 24
+             Checks found: 36
 +-----------+------------------+-----------------------------------------------------+--------+
 | Rule      | Severity         | Description                                         | Checks |
 +-----------+------------------+-----------------------------------------------------+--------+
@@ -32,6 +32,7 @@ Table of Contents
 | UCIO-1    | Critical Warning | Unconstrained Logical Port                          | 1      |
 | CFGBVS-1  | Warning          | Missing CFGBVS and CONFIG_VOLTAGE Design Properties | 1      |
 | CHECK-3   | Warning          | Report rule limit reached                           | 1      |
+| DPIP-1    | Warning          | Input pipelining                                    | 12     |
 | REQP-1840 | Warning          | RAMB18 async control check                          | 20     |
 +-----------+------------------+-----------------------------------------------------+--------+
 
@@ -39,12 +40,14 @@ Table of Contents
 -----------------
 NSTD-1#1 Critical Warning
 Unspecified I/O Standard  
-21 out of 21 logical ports use I/O standard (IOSTANDARD) value 'DEFAULT', instead of a user assigned specific value. This may cause I/O contention or incompatibility with the board power or connectivity affecting performance, signal integrity or in extreme cases cause damage to the device or the components to which it is connected. To correct this violation, specify all I/O standards. This design will fail to generate a bitstream unless all logical ports have a user specified I/O standard value defined. To allow bitstream creation with unspecified I/O standard values (not recommended), use this command: set_property SEVERITY {Warning} [get_drc_checks NSTD-1].  NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for write_bitstream step for the implementation run. Problem ports: clk, i_start, i_wdata[7:0], i_wen, n_rst, output_pixel[7:0], output_valid.
+71 out of 71 logical ports use I/O standard (IOSTANDARD) value 'DEFAULT', instead of a user assigned specific value. This may cause I/O contention or incompatibility with the board power or connectivity affecting performance, signal integrity or in extreme cases cause damage to the device or the components to which it is connected. To correct this violation, specify all I/O standards. This design will fail to generate a bitstream unless all logical ports have a user specified I/O standard value defined. To allow bitstream creation with unspecified I/O standard values (not recommended), use this command: set_property SEVERITY {Warning} [get_drc_checks NSTD-1].  NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for write_bitstream step for the implementation run. Problem ports: clk, err, i_load_kernel, i_start, i_wdata[31:0], i_wen, n_rst,
+output_pixel[31:0], output_valid.
 Related violations: <none>
 
 UCIO-1#1 Critical Warning
 Unconstrained Logical Port  
-21 out of 21 logical ports have no user assigned specific location constraint (LOC). This may cause I/O contention or incompatibility with the board power or connectivity affecting performance, signal integrity or in extreme cases cause damage to the device or the components to which it is connected. To correct this violation, specify all pin locations. This design will fail to generate a bitstream unless all logical ports have a user specified site LOC constraint defined.  To allow bitstream creation with unspecified pin locations (not recommended), use this command: set_property SEVERITY {Warning} [get_drc_checks UCIO-1].  NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for write_bitstream step for the implementation run.  Problem ports: clk, i_start, i_wdata[7:0], i_wen, n_rst, output_pixel[7:0], output_valid.
+71 out of 71 logical ports have no user assigned specific location constraint (LOC). This may cause I/O contention or incompatibility with the board power or connectivity affecting performance, signal integrity or in extreme cases cause damage to the device or the components to which it is connected. To correct this violation, specify all pin locations. This design will fail to generate a bitstream unless all logical ports have a user specified site LOC constraint defined.  To allow bitstream creation with unspecified pin locations (not recommended), use this command: set_property SEVERITY {Warning} [get_drc_checks UCIO-1].  NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for write_bitstream step for the implementation run.  Problem ports: clk, err, i_load_kernel, i_start, i_wdata[31:0], i_wen, n_rst,
+output_pixel[31:0], output_valid.
 Related violations: <none>
 
 CFGBVS-1#1 Warning
@@ -65,104 +68,164 @@ Report rule limit reached
 REQP-1840 rule limit reached: 20 violations have been found.
 Related violations: <none>
 
+DPIP-1#1 Warning
+Input pipelining  
+DSP conv_block1/sum_reg_reg input conv_block1/sum_reg_reg/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-1#2 Warning
+Input pipelining  
+DSP conv_block1/sum_reg_reg input conv_block1/sum_reg_reg/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-1#3 Warning
+Input pipelining  
+DSP conv_block1/sum_reg_reg input conv_block1/sum_reg_reg/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-1#4 Warning
+Input pipelining  
+DSP conv_block2/sum_reg_reg input conv_block2/sum_reg_reg/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-1#5 Warning
+Input pipelining  
+DSP conv_block2/sum_reg_reg input conv_block2/sum_reg_reg/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-1#6 Warning
+Input pipelining  
+DSP conv_block2/sum_reg_reg input conv_block2/sum_reg_reg/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-1#7 Warning
+Input pipelining  
+DSP conv_block3/sum_reg_reg input conv_block3/sum_reg_reg/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-1#8 Warning
+Input pipelining  
+DSP conv_block3/sum_reg_reg input conv_block3/sum_reg_reg/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-1#9 Warning
+Input pipelining  
+DSP conv_block3/sum_reg_reg input conv_block3/sum_reg_reg/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-1#10 Warning
+Input pipelining  
+DSP conv_block4/sum_reg_reg input conv_block4/sum_reg_reg/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-1#11 Warning
+Input pipelining  
+DSP conv_block4/sum_reg_reg input conv_block4/sum_reg_reg/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-1#12 Warning
+Input pipelining  
+DSP conv_block4/sum_reg_reg input conv_block4/sum_reg_reg/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
 REQP-1840#1 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_ENARDEN_cooolgate_en_sig_1) which is driven by a register (buf1/wptr_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (buf1/rptr_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#2 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_ENARDEN_cooolgate_en_sig_1) which is driven by a register (buf1/wptr_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (buf1/rptr_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#3 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_ENARDEN_cooolgate_en_sig_1) which is driven by a register (wen_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (control/FSM_onehot_state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#4 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/RSTRAMB (net: buf1/buffer1/mem_reg_i_2_n_0) which is driven by a register (buf1/rptr_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (control/FSM_onehot_state_reg[2]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#5 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/RSTRAMB (net: buf1/buffer1/mem_reg_i_2_n_0) which is driven by a register (buf1/rptr_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (control/FSM_onehot_state_reg[3]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#6 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/RSTRAMB (net: buf1/buffer1/mem_reg_i_2_n_0) which is driven by a register (control/FSM_sequential_state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (control/FSM_onehot_state_reg[4]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#7 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/RSTRAMB (net: buf1/buffer1/mem_reg_i_2_n_0) which is driven by a register (control/FSM_sequential_state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (control/FSM_onehot_state_reg[5]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#8 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/RSTRAMB (net: buf1/buffer1/mem_reg_i_2_n_0) which is driven by a register (control/FSM_sequential_state_reg[2]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (control/FSM_onehot_state_reg[6]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#9 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer3/mem_reg has an input control pin buf1/buffer3/mem_reg/ENARDEN (net: buf1/buffer3/mem_reg_ENARDEN_cooolgate_en_sig_3) which is driven by a register (buf1/wptr_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (control/FSM_onehot_state_reg[7]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#10 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer3/mem_reg has an input control pin buf1/buffer3/mem_reg/ENARDEN (net: buf1/buffer3/mem_reg_ENARDEN_cooolgate_en_sig_3) which is driven by a register (buf1/wptr_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (control/FSM_onehot_state_reg[8]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#11 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer3/mem_reg has an input control pin buf1/buffer3/mem_reg/ENARDEN (net: buf1/buffer3/mem_reg_ENARDEN_cooolgate_en_sig_3) which is driven by a register (wen_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENBWREN (net: buf1/buffer1/wen_buf_1) which is driven by a register (buf1/wptr_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#12 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer3/mem_reg has an input control pin buf1/buffer3/mem_reg/RSTRAMB (net: buf1/buffer3/mem_reg_2) which is driven by a register (control/FSM_sequential_state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENBWREN (net: buf1/buffer1/wen_buf_1) which is driven by a register (buf1/wptr_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#13 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_ENARDEN_cooolgate_en_sig_4) which is driven by a register (buf1/wptr_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENBWREN (net: buf1/buffer1/wen_buf_1) which is driven by a register (load_kernel_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#14 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_ENARDEN_cooolgate_en_sig_4) which is driven by a register (buf1/wptr_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENBWREN (net: buf1/buffer1/wen_buf_1) which is driven by a register (wen_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#15 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_ENARDEN_cooolgate_en_sig_4) which is driven by a register (wen_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1_n_0) which is driven by a register (control/FSM_onehot_state_reg[2]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#16 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/RSTRAMB (net: buf1/buffer4/mem_reg_2) which is driven by a register (buf1/rptr_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1_n_0) which is driven by a register (control/FSM_onehot_state_reg[3]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#17 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/RSTRAMB (net: buf1/buffer4/mem_reg_2) which is driven by a register (buf1/rptr_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1_n_0) which is driven by a register (control/FSM_onehot_state_reg[4]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#18 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/RSTRAMB (net: buf1/buffer4/mem_reg_2) which is driven by a register (control/FSM_sequential_state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1_n_0) which is driven by a register (control/FSM_onehot_state_reg[5]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#19 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/RSTRAMB (net: buf1/buffer4/mem_reg_2) which is driven by a register (control/FSM_sequential_state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1_n_0) which is driven by a register (control/FSM_onehot_state_reg[6]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#20 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/RSTRAMB (net: buf1/buffer4/mem_reg_2) which is driven by a register (control/FSM_sequential_state_reg[2]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1_n_0) which is driven by a register (control/FSM_onehot_state_reg[7]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 

@@ -18,7 +18,7 @@ def apply_horizontal_sobel(image_path, output_path):
     # dx=0, dy=1 calculates the derivative in the Y direction (detects horizontal lines)
     # ksize=3 uses a standard 3x3 kernel
     # cv2.CV_64F keeps negative values (gradients) which are later converted
-    sobel_y = cv2.Sobel(gray, cv2.CV_64F, dx=1, dy=0, ksize=3)
+    sobel_y = cv2.Laplacian(gray, cv2.CV_64F, ksize=3)
 
     # 4. Convert back to uint8
     # We take the absolute value to handle negative gradients (dark-to-light transitions)

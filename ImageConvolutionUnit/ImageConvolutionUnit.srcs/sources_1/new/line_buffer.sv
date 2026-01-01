@@ -1,27 +1,28 @@
 `timescale 1ns / 1ps
 
-module line_buffer #(parameter SIZE=512) (
+module line_buffer #(parameter SIZE=128) (
     input  logic        clk,
     input  logic        n_rst,
-    input  logic        rptr_rst,
+    input  logic        rptr_rst, // Resets the read pointer - makes the buffer appear empty
     input  logic        ren,
     input  logic        wen,
-    input  logic [7:0]  wdata,
+    input  logic [31:0]  wdata,
     output logic empty,
     output logic full,
-    output logic [7:0] rdata
+    output logic [31:0] rdata // BRAM output register
 );
 
 
-    localparam ADDR_BITS = $clog2(SIZE);
+    localparam ADDR_BITS = $clog2(SIZE); // Number of address bits required for the buffer
 
-    logic [7:0] mem [SIZE-1:0];
-
+    logic [31:0] mem [SIZE-1:0];
+    logic [31:0] read_reg_1; // Register to hold read data
+    
     logic [ADDR_BITS:0] rptr, wptr; 
     logic [ADDR_BITS:0] nxt_wptr, nxt_rptr;
 
     logic [ADDR_BITS-1:0] waddr, raddr;
-    logic [ADDR_BITS:0] rptr_inverted; 
+    logic [ADDR_BITS:0] rptr_inverted; // Inverted read pointer for full detection
 
     logic full_n, empty_n;  
 
@@ -38,12 +39,13 @@ module line_buffer #(parameter SIZE=512) (
     end
 
     always_ff @(posedge clk) begin
-        rdata <= '0; 
-        if (ren & ~empty)
-            rdata <= mem[raddr];
+        if (ren & ~empty) begin
+            read_reg_1 <= mem[raddr];
+        end
+        rdata <= read_reg_1; 
     end
 
-    always_comb begin
+    always_comb begin: empty_full_logic
         empty_n = empty; 
         full_n = full;
         
@@ -71,7 +73,7 @@ module line_buffer #(parameter SIZE=512) (
         end
     end
 
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk) begin: ptr_ff
         if (~n_rst) begin
             wptr <= '0;
             rptr <= '0;

@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
-// Engineer: 
+// Engineer: Aryan Karani
 // 
 // Create Date: 11/27/2025 11:35:15 PM
 // Design Name: 
@@ -9,7 +9,8 @@
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
-// Description: 
+// Description: Shift register module that shifts in serial data and outputs parallel data. 
+// It supports enabling/disabling the shift operation and resetting the register when the buffer shifts.
 // 
 // Dependencies: 
 // 
@@ -20,11 +21,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module shift_reg #(parameter WIDTH=24) (
+module shift_reg #(parameter WIDTH=64) (
     input logic clk, n_rst, 
-    input logic shift_en, 
-    input logic [7:0] serial_in,
-    output logic [WIDTH-1:0] o_data
+    input logic shift_en, buffer_shift, // Buffer shift signal says when o_data needs to be reset
+    input logic [31:0] serial_in, // 32 bit input
+    (* keep = "true", MAX_FANOUT = 10 *) output logic [WIDTH-1:0] o_data
     );
     
     always_ff @(posedge clk, negedge n_rst) begin
@@ -32,8 +33,11 @@ module shift_reg #(parameter WIDTH=24) (
             o_data <= '0; 
         end
         else begin
-            if (shift_en) begin
-                o_data <= {o_data[WIDTH-9:0], serial_in};
+            if (buffer_shift) begin
+                o_data <= '0; 
+            end
+            else if (shift_en) begin
+                o_data <= {o_data[WIDTH-33:0], serial_in};
             end
         end
     end
