@@ -9,6 +9,14 @@ Main Purpose: Apply a 3x3 kernel filter to a 512x512 grayscale image
 
 Next Steps: Dynamic filter loading (DONE), larger images, RGB images, create user function that manages the input signals given a BMP image (for a microprocessor like Zynq)
 
+More information on my blog:
+
+Part 1 - https://aryan-karani.vercel.app/blog/fpga-image-convolution-accelerator-part-1
+
+Part 2 - Coming Soon!
+
+Part 3 - Coming Soon!
+
 ## Files: 
 
 The Vivado Project is found in ImageConvolutionUnit/
@@ -67,6 +75,7 @@ i_start going high activates the MAC and shifting of data from the line buffer i
 
 ## Example Input -> Output
 Input Image: 
+
 ![clown_image](/test_scripts/clown.bmp)
 
 Output Image with Laplacian Edge Detection Filter: 
