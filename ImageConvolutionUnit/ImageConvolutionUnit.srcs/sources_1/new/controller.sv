@@ -90,18 +90,18 @@ module controller(
             end
             LAST_DATA_1: begin
                 start_conv = 1;
-                shift_en = 1;
-                ren = 1; 
+                shift_en = 0;
+                ren = 0; 
             end
             LAST_DATA_2: begin
                 start_conv = 1; 
-                shift_en = 1;
-                ren = 1; 
+                shift_en = 0;
+                ren = 0; 
             end
             LAST_DATA_3: begin
                 start_conv = 1; 
-                shift_en = 1;
-                ren = 1; 
+                shift_en = 0;
+                ren = 0; 
             end
             default: begin
                 start_conv = 0; 

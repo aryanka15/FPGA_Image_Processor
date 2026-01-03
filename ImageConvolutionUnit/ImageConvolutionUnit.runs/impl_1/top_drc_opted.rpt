@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date         : Thu Jan  1 02:48:38 2026
+| Date         : Fri Jan  2 15:53:16 2026
 | Host         : AryanHPLaptop running 64-bit major release  (build 9200)
 | Command      : report_drc -file top_drc_opted.rpt -pb top_drc_opted.pb -rpx top_drc_opted.rpx
 | Design       : top
@@ -130,102 +130,102 @@ Related violations: <none>
 
 REQP-1840#1 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (buf1/rptr_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1_n_0) which is driven by a register (buf1/rptr_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#2 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (buf1/rptr_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1_n_0) which is driven by a register (buf1/rptr_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#3 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (control/FSM_onehot_state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1_n_0) which is driven by a register (control/FSM_onehot_state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#4 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (control/FSM_onehot_state_reg[2]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1_n_0) which is driven by a register (control/FSM_onehot_state_reg[2]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#5 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (control/FSM_onehot_state_reg[3]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1_n_0) which is driven by a register (control/FSM_onehot_state_reg[3]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#6 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (control/FSM_onehot_state_reg[4]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1_n_0) which is driven by a register (control/FSM_onehot_state_reg[4]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#7 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (control/FSM_onehot_state_reg[5]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1_n_0) which is driven by a register (control/FSM_onehot_state_reg[5]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#8 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (control/FSM_onehot_state_reg[6]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENBWREN (net: buf1/buffer1/wen_buf_1) which is driven by a register (buf1/wptr_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#9 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (control/FSM_onehot_state_reg[7]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENBWREN (net: buf1/buffer1/wen_buf_1) which is driven by a register (buf1/wptr_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#10 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENARDEN (net: buf1/buffer1/mem_reg_i_1__2_n_0) which is driven by a register (control/FSM_onehot_state_reg[8]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENBWREN (net: buf1/buffer1/wen_buf_1) which is driven by a register (load_kernel_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#11 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENBWREN (net: buf1/buffer1/wen_buf_1) which is driven by a register (buf1/wptr_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENBWREN (net: buf1/buffer1/wen_buf_1) which is driven by a register (wen_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#12 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENBWREN (net: buf1/buffer1/wen_buf_1) which is driven by a register (buf1/wptr_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1__0_n_0) which is driven by a register (buf1/rptr_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#13 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENBWREN (net: buf1/buffer1/wen_buf_1) which is driven by a register (load_kernel_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1__0_n_0) which is driven by a register (buf1/rptr_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#14 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer1/mem_reg has an input control pin buf1/buffer1/mem_reg/ENBWREN (net: buf1/buffer1/wen_buf_1) which is driven by a register (wen_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1__0_n_0) which is driven by a register (control/FSM_onehot_state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#15 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1_n_0) which is driven by a register (control/FSM_onehot_state_reg[2]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1__0_n_0) which is driven by a register (control/FSM_onehot_state_reg[2]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#16 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1_n_0) which is driven by a register (control/FSM_onehot_state_reg[3]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1__0_n_0) which is driven by a register (control/FSM_onehot_state_reg[3]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#17 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1_n_0) which is driven by a register (control/FSM_onehot_state_reg[4]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1__0_n_0) which is driven by a register (control/FSM_onehot_state_reg[4]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#18 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1_n_0) which is driven by a register (control/FSM_onehot_state_reg[5]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1__0_n_0) which is driven by a register (control/FSM_onehot_state_reg[5]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#19 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1_n_0) which is driven by a register (control/FSM_onehot_state_reg[6]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENBWREN (net: buf1/buffer4/wen_buf_4) which is driven by a register (load_kernel_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#20 Warning
 RAMB18 async control check  
-The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENARDEN (net: buf1/buffer4/mem_reg_i_1_n_0) which is driven by a register (control/FSM_onehot_state_reg[7]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB18E1 buf1/buffer4/mem_reg has an input control pin buf1/buffer4/mem_reg/ENBWREN (net: buf1/buffer4/wen_buf_4) which is driven by a register (wen_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 
