@@ -79,9 +79,11 @@ Input Image:
 ![clown_image](/test_scripts/clown.bmp)
 
 Output Image with Laplacian Edge Detection Filter: 
+
 ![clown_image_filtered](/output/clown_filtered.bmp)
 
 Output Image from Software (img_filter.py script): 
+
 ![clown_image_sw_filter](/output/clown_horizontal_sw.bmp)
 
 (There's a slight brightness/contrast difference, maybe due to the kernel that OpenCV uses versus my testbench. The Sobel filters look identical)
