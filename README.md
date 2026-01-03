@@ -15,7 +15,7 @@ Part 1 - https://aryan-karani.vercel.app/blog/fpga-image-convolution-accelerator
 
 Part 2 - https://aryan-karani.vercel.app/blog/fpga-image-convolution-accelerator-part-2
 
-Part 3 - Coming Soon!
+Part 3 - https://aryan-karani.vercel.app/blog/fpga-image-convolution-accelerator-part-3
 
 ## Files: 
 
